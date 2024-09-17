@@ -1,0 +1,147 @@
+<body class="color-fondo-body">
+
+
+
+
+<section class="container-administracion">
+  <h1 class="titulos">Tipos de Profesión</h1>
+
+  <!-- Button trigger modal -->
+  <div>
+      <button type="button" class="Btn" data-bs-toggle="modal" data-bs-target="#ModalProfesion">  
+      <div class="sign">+</div>
+      <div class="text">Agregar</div></button>
+  </div>
+
+
+<div class="modal fade" id="ModalProfesion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalTitulo">Nueva Profesión</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario con validaciones -->
+        <form id="formProfesion" class="needs-validation" novalidate>
+          <!-- Campo oculto -->
+          <input type="hidden" id="ProfesionID" value="0">
+
+          <!-- Profesión -->
+          <div class="input-group flex-nowrap mb-3">
+            <span class="input-group-text" id="addon-wrapping">🛠️</span>
+            <label for="nombreProfesion" class="form-label visually-hidden">Profesión</label>
+            <input type="text" class="form-control" id="nombreProfesion" placeholder="Profesión" required>
+            <div class="invalid-feedback">
+              Por favor ingresa un nombre para la profesión.
+            </div>
+          </div>
+
+          <!-- Matrícula -->
+          <div class="input-group flex-nowrap mb-3" style="margin-top: 30px;">
+            <span class="input-group-text" id="addon-wrapping">📜</span>
+            <label for="matricula" class="form-label visually-hidden">Matrícula</label>
+            <input type="text" class="form-control" id="matricula" placeholder="Matrícula" required>
+            <div class="invalid-feedback">
+              Por favor ingresa la matrícula.
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="LimpiarModal()">Cancelar</button>
+        <button type="submit" class="btn btn-primary" form="formProfesion" id="btnGuardar" onclick="GuardarProfesion()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal -->
+  @* <div class="modal fade" id="ModalProfesion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalTitulo">Nueva Profesion</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action=""></form>
+          <div class="input-group flex-nowrap">
+            
+            <input type="hidden" id="ProfesionID" value="0">
+            <label for="nombreProfesion" class="form-label">Profesion</label>
+
+            <input type="text" class="form-control" id="nombreProfesion" placeholder="Profesion">
+          </div>
+
+          
+          <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping"></span>
+            <input type="hidden" id="" value="0">
+            <label for="matricula" class="form-label">Matricula</label>
+
+            <input type="text" class="form-control" id="matricula" placeholder="Matricula">
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"
+            data-bs-dismiss="modal" onclick="LimpiarModal()">Cancelar</button>
+          <button type="button" class="btn btn-primary"  id="btnGuardar" onclick="GuardarProfesion()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div> *@
+
+
+
+<div class="tbl-administracion" style="overflow: hidden; border-radius: 20px;">
+  <table class="table table-dark table-striped" style="border-radius: 20px; overflow: hidden; width: 100%;">
+    <thead>
+      <tr>
+        <th style="background-color: #241199;">Nombre</th>
+        <th style="background-color: #241199;">Matricula</th>
+        <th style="width: 150px; background-color: #241199;">Editar</th>
+        <th style="width: 110px; background-color: #241199;">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody id="tbody-Profesion"></tbody>
+  </table>
+</div>
+
+
+</section>
+
+<!-- Validaciones personalizadas con Bootstrap -->
+<script>
+  (() => {
+    'use strict';
+
+    // Seleccionar el formulario
+    const form = document.querySelector('#formProfesion');
+
+    // Validar en el submit
+    form.addEventListener('submit', (event) => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      form.classList.add('was-validated');
+    }, false);
+  })();
+</script>
+
+
+  @section Scripts {
+
+    <script src="~/js/TiposProfesion.1.0.0.js"></script>
+  }
+
+
+
+
+
+
+</body>

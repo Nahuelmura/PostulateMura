@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+  ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/lib/MDB5/css/mdb.min.css" asp-append-version="true" />
+
+<section class="container-home">
+  <h1 class="tit">Postulate.com</h1>
+  <div class="text-center titulo">
+    <main>
+      <h1 class="titulo-home">Bienvenido, @ViewBag.NombrePersona! </h1>
+    </main>
+    <p class="sub">¿Buscas empleo o necesitas contratar servicios? Postúlate con nosotros y conecta con las
+      mejores oportunidades y profesionales en tu área. Ya sea que estés buscando trabajo o necesites ayuda en casa,
+      estamos aquí para facilitarte el proceso. ¡Empieza hoy mismo!</p>
+
+  </div>
+  <div style="text-align: center;">
+    <button class="btn-donate">
+      <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </button>
+    <button class="btn-donate">
+      <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </button>
+  </div>
+</section>

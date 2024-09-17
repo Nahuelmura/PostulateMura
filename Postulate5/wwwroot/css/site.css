@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+html{
+  background: var(--bs-dark-bg-subtle);
+}
+
+
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+
+
+
+
+/* sidenav */
+
+
+
+
+ 
+/* Estilo para los elementos del menú del sidenav */
+.sidenav-item {
+  margin-bottom: 2rem; /* Espacio entre los elementos del menú */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* formualrio  */
+
+
+.Contenedor-formulario {
+
+  background: #1316c8;
+  background: -webkit-linear-gradient(0deg, #1316c8 0%, #210a2e 100%);
+  background: linear-gradient(0deg, #1316c8 0%, #210a2e 100%);
+  color: #fff;
+  padding: 20px 20px 20px;
+  border-radius: 10px;
+  width: 100%;
+
+
+}
+
+.titulo {
+  text-align: center;
+}
+
+.titulo-3 {
+  text-align: center;
+}
+
+.titulo-6 {
+  text-align: center;
+  padding-top: 10em;
+}
+
+.Formulario-Nombres{
+  text-align: center;
+}
+
+
+
+
+
+
+/* nanbar */
+
+.encabezado{
+  height: 120px;
+  background: var(--bs-dark-bg-subtle);
+}
+
+.navbar {
+  background-color: #fff;
+  height: 80px;
+  margin: 20px;
+  border-radius: 16px;
+  padding: 0.5rem;
+}
+
+.navbar-brand{
+  font-weight: 500;
+  color: #22118f;
+  font-size: 24px;
+  transition: 0.3s color;
+}
+
+.login-button{
+  background-color: #241199;
+  font-size: 14px;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: 0.3s background-color;
+}
+
+.login-button:hover{
+  background-color: #100555;
+}
+
+.navbar-toggler {
+  border: none;
+  font-size: 1.25rem;
+}
+
+.navbar-toggler:focus, .btn-close:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.nav-link.mx-lg-2 {
+  color: #241199;
+  font-weight: 700;
+  position: relative;
+}
+
+
+.nav-link.mx-lg-2:hover, .nav-link.mx-lg-2.active {
+  color: #000;
+}
+
+@media (min-width: 991px)  {
+  .nav-link.mx-lg-2::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 2px;
+      background-color: #241199;
+      visibility: hidden;
+      transition: 0.1s ease-in-out;
+  }
+  .nav-link.mx-lg-2:hover::before, .nav-link.mx-lg-2.active::before {
+      width: 100%;
+      visibility: visible;
+  }
+}
+
+.avatar {
+  height: 40px;
+  width: 40px;
+}
+
+
+
+
+/*LOGIN*/
+
+
+
+#login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 96vh;
+  background-size: cover;
+  background-position: center;
+}
+
+
+
+.login-box {
+  position: relative;
+  width: 400px;
+  height: 500px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 5);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(15px);
+}
+
+.h2l {
+  font-size: 2.5em;
+  color: #f5f5f5;
+  text-align: center;
+}
+
+.input-box {
+  position: relative;
+  width: 310px;
+  margin: 30px 0;
+  border-bottom: 2px solid #fff;
+}
+
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  bottom: 10px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: #f5f5f5;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+  top: -5px
+}
+
+.input-box input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #f5f5f5;
+}
+
+
+
+
+.remember {
+  margin: -15px 0 15px;
+  font-size: .9em;
+  color: #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+}
+
+#button {
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #0e2238;
+  font-weight: 500;
+}
+
+.register-link {
+  font-size: .9em;
+  color: #40064d;
+  text-align: center;
+  margin: 25px 0 10px;
+}
+
+.register-link p a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link p a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 360px) {
+  .login-box {
+    width: 100px;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+  }
+
+  .input-box {
+    width: 290px;
+  }
+}
+
+
+#register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 96vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.register-box {
+  position: relative;
+  width: 400px;
+  height: 500px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 5);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(15px);
+}
+
+.h2r {
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  margin-bottom: 80px;
+  font-size: 2.5em;
+  color: #f5f5f5;
+  text-align: center;
+}
+
+.input-register {
+  position: relative;
+  margin: 50px;
+  width: 310px;
+  margin: 30px 0;
+  border-bottom: 2px solid #fff;
+}
+
+
+
+.input-register label {
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  bottom: 10px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: #f5f5f5;
+  pointer-events: none;
+
+}
+
+.input-register input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #fff;
+}
+
+#registerSubmit {
+  width: 100%;
+  height: 40px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #2b1695;
+  font-weight: 500;
+}
+
+/* Button register*/
+
+.btn-donate {
+  --clr-font-main: hsla(0 0% 20% / 100);
+  --btn-bg-1: hsla(194 100% 69% / 1);
+  --btn-bg-2: hsla(217 100% 56% / 1);
+  --btn-bg-color: hsla(360 100% 100% / 1);
+  --radii: 0.5em;
+  cursor: pointer;
+  padding: 0.9em 1.4em;
+  min-width: 120px;
+  min-height: 44px;
+  font-size: var(--size, 1rem);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-weight: 500;
+  transition: 0.8s;
+  background-size: 280% auto;
+  background-image: linear-gradient(325deg, var(--btn-bg-2) 0%, var(--btn-bg-1) 55%, var(--btn-bg-2) 90%);
+  border: none;
+  border-radius: var(--radii);
+  color: var(--btn-bg-color);
+  box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5), 0px 5px 5px -1px rgba(58, 125, 233, 0.25), inset 4px 4px 8px rgba(175, 230, 255, 0.5), inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+}
+
+.btn-donate:hover {
+  background-position: right top;
+}
+
+.btn-donate:is(:focus, :focus-visible, :active) {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-donate {
+    transition: linear;
+  }
+}

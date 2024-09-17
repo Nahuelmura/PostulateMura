@@ -1,0 +1,146 @@
+<head>
+    <link rel="stylesheet" href="~/css/VistaServicio.css" asp-append-version="true" />
+</head>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalProvincia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="ModalTitulo">Editar Perfil</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formProvincia">
+                    <input type="hidden" id="ServicioID" value="@ViewBag.ServicioID">
+                    <input type="hidden" id="PersonaID" value="0">
+                    <input type="hidden" id="ProfesionID" value="0">
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" id="descripcion" placeholder="Agregar Descripción">
+                    </div>
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="titulo" placeholder="Título profesional/Universitario">
+                    </div>
+                    <div class="mb-3">
+                        <label for="institucion" class="form-label">Institución</label>
+                        <input type="text" class="form-control" id="institucion" placeholder="Institución">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="LimpiarModal();" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary"  onclick="agregarServicio()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h1 class="text-center my-4">Perfil</h1>
+    <div id="perfilContainer" class="container">
+        <!-- Aquí se insertarán los datos del perfil -->
+    </div>
+</div>
+<div class="text-center my-4">
+    <button type="button" class="btn btn-primary botones" onclick="EditarServicio()" data-bs-toggle="modal" data-bs-target="#ModalProvincia">
+        <i class="fa-light fa-newspaper"></i> Editar
+    </button>
+</div>
+
+@section Scripts {
+    <script src="~/js/Servicio.1.0.0.js"></script>
+    <script>
+
+        window.onload = CargarPerfilServicio();
+        function CargarPerfilServicio () {
+            var servicioID = @ViewBag.ServicioID;
+
+            if (servicioID) {
+                $("#perfilContainer").empty();
+                $.ajax({
+                    url: '/Servicios/RecuperarPerfilServicio',
+                    type: 'POST',
+                    data: { id: servicioID },
+                    dataType: 'json',
+                    success: function (perfilMostrar) {
+                    $("#perfilContainer").empty();
+                        let contenidoPerfil = `<div class="row">`;
+
+                        $.each(perfilMostrar, function (index, perfil) {
+
+                            document.getElementById("PersonaID").value = perfil.personaID;
+                            document.getElementById("ProfesionID").value = perfil.profesionID;
+
+                            contenidoPerfil += `
+                                <div class="col-md-6">
+                                    <div class="card mb-4">
+                                        <div class="card-header bg-secondary text-white titulo-card-vista">
+                                            Información Personal
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="textoh3"><strong>Nombre:</strong> ${perfil.nombrePersona}</p>
+                                            <p class="textoh3"><strong>Apellido:</strong> ${perfil.apellidoPersona}</p>
+                                            <p class="textoh3"><strong >Teléfono:</strong> ${perfil.telefonoPersona}</p>
+                                            <p class="textoh3"><strong >Edad:</strong> ${perfil.edadPersona}</p>
+                                            <p class="textoh3"><strong >Documento:</strong> ${perfil.documentoPersona}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-4">
+                                        <div class="card-header bg-info text-white titulo-card-vista">
+                                            Información Profesional
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="textoh2"><strong>Nombre Profesión:</strong> ${perfil.nombreProfesion}</p>
+                                            <p class="textoh3"><strong>Descripción:</strong> ${perfil.descripcion}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="card mb-4">
+                                        <div class="card-header bg-success text-white titulo-card-vista">
+                                            Educación
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="textoh3"><strong>Título:</strong> ${perfil.titulo}</p>
+                                            <p class="textoh3"><strong>Institución:</strong> ${perfil.institucion}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-4">
+                                        <div class="card-header bg-warning text-white titulo-card-vista">
+                                            Contacto
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="textoh3"><strong>Email:</strong> ${perfil.emailPersona}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-4">
+                                        <div class="card-header bg-dark text-white titulo-card-vista">
+                                            Imagenes
+                                        </div>
+                                        <div class="card-body">
+                                            <p><strong>Imagen ID:</strong> ${perfil.imagenID}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        contenidoPerfil += `</div>`; // Cerrar la fila
+                        $("#perfilContainer").append(contenidoPerfil);
+                         $("#ModalProvincia").modal("hide");
+                        document.getElementById("perfilContainer").innerHTML = contenidoPerfil;
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error al cargar el perfil del servicio:', error);
+                    }
+                });
+            }
+        }
+    </script>
+}

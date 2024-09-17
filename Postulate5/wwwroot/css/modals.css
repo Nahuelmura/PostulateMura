@@ -1,0 +1,26 @@
+/* Estilos adicionales para personalizar el formulario */
+.bg-dark {
+    background-color: #343a40 !important;
+  }
+  
+  .bg-secondary {
+    background-color: #495057 !important;
+  }
+  
+  .btn-close-white {
+    filter: invert(1);
+  }
+  
+  .form-control, .form-select {
+    border: 1px solid #6c757d;
+  }
+
+  .modal-title{
+    font-size: 25px;
+    color: #fff;
+  }
+
+  .modal-header{
+    background-color: #241199;
+  }
+  

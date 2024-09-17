@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Trabajos</title>
+    <link rel="stylesheet" href="~/css/Trabajo.css" asp-append-version="true" />
+        <script src="~/js/VistaTrabajo.js"></script>
+</head>
+
+<body>
+    <!-- Botón para abrir el modal de agregar trabajo -->
+    <div class="boton-container">
+        <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#agregarTrabajo">Agregar
+            Servicio</button>
+    </div>
+    <!-- Contenedor principal de las tarjetas -->
+    <div class="contenedor-card" id="TrabajoID">
+        <div id="contenedorCards" class="row"></div>
+    </div>
+
+    <!-- Modal para agregar un nuevo trabajo -->
+    <div class="modal fade" id="agregarTrabajo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content modal_style">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel" style="color: white;">Nuevo Trabajo</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" class="row g-3">
+                        <input type="hidden" id="TrabajoID">
+                        <div class="col-md-6">
+                            <label for="PersonaID" class="form-label">Nombre</label>
+                            @Html.DropDownList("PersonaID", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6">
+                            <label for="ProfesionID" class="form-label">Profesion</label>
+                            @Html.DropDownList("ProfesionID", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-6">
+                            <label for="direccion" class="form-label">Direccion</label>
+                            <input type="text" id="direccion" class="form-control" placeholder="Direccion">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <input type="text" id="descripcion" class="form-control" placeholder="descripcion">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="comentario" class="form-label">Comentario</label>
+                            <input type="text" id="comentario" class="form-control" placeholder="Comentario">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="hora" class="form-label">Hora solicitada</label>
+                            <input type="datetime-local" id="hora" class="form-control" placeholder="Hora">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="fecha" class="form-label">Fecha</label>
+                            <input type="date" id="fecha" class="form-control" placeholder="Fecha">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="agregarTrabajo()">Guardar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script src="~/js/VistaTrabajo.js"></script>
+    }
+</body>
+
+</html>

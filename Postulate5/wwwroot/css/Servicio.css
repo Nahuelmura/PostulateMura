@@ -1,0 +1,144 @@
+
+
+.container-servicio{
+    background: var(--bs-dark-bg-subtle);
+    height: 85vh;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+
+
+/* Contenedor de botones centrado */
+
+.boton-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem; 
+}
+
+/* Estilo para los botones */
+.boton {
+    padding: 1rem 2rem; 
+    font-size: 1.25rem; 
+    border-radius: 0.5rem;
+}
+
+/* Contenedor card   texto centrado */
+.card-items {
+    background-color: #f8f9fa; 
+    padding: 20px;            
+    border: 1px solid #dee2e6; 
+    border-radius: 10px;       
+    height: 100%;              
+    margin-bottom: 100em;
+    text-align: center; /* Centrar texto dentro del contenedor */
+}
+
+/* Estilo para las card */
+.tamaniocard {
+    height: 25em;
+    width: 24em;
+    margin: 10px; 
+    display: grid;
+    background-image: url("/wwwroot/lib/img/albañil.jpeg");
+    background-color: #bbc5cf; 
+    padding: 20px; 
+    border: 1px solid #dee2e6; 
+    border-radius: 10px; 
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    background-size: cover;
+    text-align: center; /* Centrar texto dentro del contenedor */
+}
+
+/* Estilo para el título card  */
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center; /* Centrar el texto del título */
+}
+
+/* Estilo para el texto card  */
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-align: center; /* Centrar el texto dentro del contenedor */
+}
+
+/* Estilo para la sección de profesión */
+.profesion-group h3 {
+    text-align: center;
+    margin-bottom: 20px; /* Separación inferior del título */
+}
+
+/* Contenedor de tarjetas */
+.card-container {
+    padding: 15px;
+}
+
+/* Estilo para los elementos de la tarjeta */
+.card-items {
+    background-color: #f8f9fa; 
+    padding: 20px;            
+    border: 1px solid #dee2e6; 
+    border-radius: 10px;       
+    height: 100%;              
+    margin-bottom: 100em;
+    text-align: center; /* Centrar texto dentro del contenedor */
+}
+
+/* Ajuste de tamaño y estilo para tarjetas */
+.tamaniocard {
+    height: 25em;
+    width: 24em;
+    margin: 10px; 
+    display: grid;
+    background-image: url("/wwwroot/lib/img/albañil.jpeg");
+    background-color: #bbc5cf; 
+    padding: 20px; 
+    border: 1px solid #dee2e6; 
+    border-radius: 10px; 
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    background-size: cover;
+    text-align: center; /* Centrar texto dentro del contenedor */
+}
+
+
+
+
+  .lugar{
+    text-align: center;
+    font-size: 2em;
+  }
+
+  #perfilContainer {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.textoh3 {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.textoh2 {
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+.titulo-card-vista{
+    font-size: 10em;
+}
+
+.color-Card{
+    
+    background-color: #D2E0FB;
+}
+  
+

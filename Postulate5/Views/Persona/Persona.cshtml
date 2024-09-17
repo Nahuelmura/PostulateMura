@@ -1,0 +1,158 @@
+@{
+    ViewData["Title"] = "Persona";
+    var correoUsuarioLogueado = ViewBag.CorreoUsuarioLogueado as string;
+}
+<section class="conteiner-persona">
+    <h1 class="titulo">Ingresar datos personales</h1>
+
+    <div class="Contenedor-formulario">
+        <div class="row">
+            <div class="col-6">
+                <form id="formulario">
+                    <div class="row">
+                        <input type="hidden" id="PersonaID" value="0" />
+                        <div class="form-group col-12 Formulario-Nombres">
+                            <label for="ProvinciaID" class="form-label text-light">Provincia</label>
+                            @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-12 Formulario-Nombres">
+                            <label for="LocalidadID" class="form-label text-light">Ciudad</label>
+                            @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="form-group col-12 Formulario-Nombres">
+                            <label for="nombre" class="form-label text-light">Ingresar Nombre</label>
+                            <input type="text" id="nombre" name="nombre" class="form-control"
+                                placeholder="Ingresar Nombre">
+                        </div>
+                        <div class="form-group col-12 Formulario-Nombres">
+                            <label for="apellido" class="form-label text-light">Ingresar Apellido</label>
+                            <input type="text" id="apellido" name="apellido" class="form-control"
+                                placeholder="Apellido">
+                        </div>
+                        <div class="form-group col-12 Formulario-Nombres">
+                            <label for="edad" class="form-label text-light">Ingresar Edad</label>
+                            <input type="number" name="edad" id="edad" class="form-control" placeholder="Edad">
+                        </div>
+                        <div class="form-group col-12 Formulario-Nombres">
+                            <label for="telefono" class="form-label text-light">Ingresar Teléfono</label>
+                            <input type="number" id="telefono" name="telefono" class="form-control"
+                                placeholder="Teléfono">
+                        </div>
+                        <div class="form-group col-12 Formulario-Nombres">
+                            <label for="documento" class="form-label text-light">Ingresar Documento</label>
+                            <input type="number" id="documento" name="documento" class="form-control"
+                                placeholder="Documento">
+                        </div>
+                        <div class="form-group col-12 Formulario-Nombres">
+                            <label for="correo" class="form-label text-light">Ingresar Correo</label>
+                            <input type="email" id="correo" name="correo" value="@correoUsuarioLogueado"
+                                class="form-control" readonly />
+                        </div>
+                        <div class="form-group col-12 Formulario-Nombres">
+                            <button type="submit" class="btn btn-secondary">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Div para mostrar el mensaje de éxito -->
+                <div id="mensajeExito" style="display:none;"></div>
+            </div>
+
+            <div class="col-6">
+                <h1 class="titulo">Postulate.Com</h1>
+                <hr>
+                <h3 class="titulo-3">Regístrate de forma gratuita, ofrece tus servicios y recibe trabajos</h3>
+                <h6 class="titulo-6">Completa todos los campos para poder inscribirte</h6>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+   
+
+    <script>
+        (() => {
+            'use strict';
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation');
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+
+
+    @* <!-- Modal -->
+    <div class="modal fade" id="ModalFormulario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="ModalTitulo"></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+    <div class="form-group row">
+    <div class="col-12 mb-3">
+    <label for="LocalidadID" class="form-label">Ciudad</label>
+    @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="col-12 mb-3">
+    <label for="ProvinciaID" class="form-label">Tipo de Ejercicio</label>
+    @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
+    </div>
+    </div>
+    <div class="form-group row">
+    <div class="col-12 mb-3">
+    <label for="nombre" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+    </div>
+    <div class="col-12 mb-3">
+    <label for="apellido" class="form-label">Apellido</label>
+    <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+    </div>
+    <div class="col-12 mb-3">
+    <label for="edad" class="form-label">Edad</label>
+    <input type="number" class="form-control" id="edad" placeholder="Edad">
+    </div>
+    <div class="col-12 mb-3">
+    <label for="telefono" class="form-label">Teléfono</label>
+    <input type="number" class="form-control" id="telefono" placeholder="Teléfono">
+    </div>
+    <div class="col-12 mb-3">
+    <label for="documento" class="form-label">Documento</label>
+    <input type="number" class="form-control" id="documento" placeholder="Documento">
+    </div>
+    <div class="col-12 mb-3">
+    <label for="correo" class="form-label">Correo</label>
+    <input type="email" class="form-control" id="correo" placeholder="Correo">
+    </div>
+    <div class="col-12 mb-3">
+    <label for="codigoPostal" class="form-label">Código Postal</label>
+    <input type="text" class="form-control" id="codigoPostal" placeholder="Código Postal">
+    </div>
+    </div>
+    <button type="button" onclick="LimpiarModal();" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+    <button type="button" class="btn btn-primary" onclick="GuardarLocalidad()">Guardar</button>
+    </div>
+    </div>
+    </div>
+    </div> *@
+</section>
+
+
+
+@section Scripts {
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/Persona.1.0.0.js"></script>
+}

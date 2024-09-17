@@ -1,0 +1,103 @@
+<head>
+
+
+  <script src="~/js/VistaPersonaPerfil1.0.0.js"></script>
+  <script src="~/js/Persona.1.0.0.js"></script>
+
+</head>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalVistaPersona" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <input type="hidden" id="PersonaID" value="0">
+
+
+
+
+        <form>
+
+          <div class="form-group col-12 Formulario-Nombres">
+            <label for="LocalidadID" class="form-label text-light">Ciudad</label>
+            @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="nombre" id="nombre" aria-label="Nombre"
+              aria-describedby="basic-addon2">
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="apellido" id="apellido" aria-label="Apellido"
+              aria-describedby="basic-addon2">
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="edad" id="edad" aria-label="Edad"
+              aria-describedby="basic-addon2">
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="telefono" id="telefono" aria-label="Teléfono"
+              aria-describedby="basic-addon2">
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="documento" id="documento" aria-label="Documento"
+              aria-describedby="basic-addon2">
+          </div>
+        </form>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="GuardarPerfil()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+
+  <!-- Contenedor para datos generados por JavaScript -->
+  <div id="perfilContainer" class="col-md-7">
+    <!-- Aquí se llenará el contenido dinámico mediante JavaScript -->
+  </div>
+
+
+
+  <div id="perfilRazorContainer" class="col-md-5">
+    <p class="posicion_Link_perfil">
+      <a class="Link_perfil" id="forgot-password"
+        href="@Url.Page("/Account/ForgotPassword", new { area = "Identity" })">¿Quiere cambiar la contraseña?</a>
+    </p>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+@section Scripts {
+  <script src="~/lib/jquery/jquery-3.6.0.min.js"></script>
+  <script src="~/js/VistaPersonaPerfil1.0.0.js"></script>
+  <script src="~/js/Persona.1.0.0.js"></script>
+
+
+
+}

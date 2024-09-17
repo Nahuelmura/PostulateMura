@@ -1,0 +1,31 @@
+
+
+.conteiner-persona{
+    background: var(--bs-dark-bg-subtle)
+}
+
+
+
+/* formulario */
+
+.Felicitaciones{
+    height: 8em;
+    font-size: 50px;
+    display: flex;
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    text-align: center; /* Alineación del texto */
+    color: white;
+ 
+
+}
+
+.posicion_Link_perfil{
+    padding-top: 2em;
+    text-decoration: none;
+}
+.Link_perfil{
+    font-size: 2em;
+    margin-top: 50em;
+    text-decoration: none;
+}

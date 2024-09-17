@@ -1,0 +1,84 @@
+.profesion-group h3 {
+    text-align: center;
+    margin-bottom: 20px; /* Separación inferior del título */
+    margin-top: 20px;
+    color: black;
+}
+.lugar {
+    text-align: center;
+}
+
+.card-container {
+    padding: 15px;
+}
+.contenedor-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: solid 1px rgb(224, 217, 217);  
+    padding: 20px; /* Añade un poco de espacio alrededor */
+    margin: 20px; /* Añade margen para separar el contenedor del fondo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade sombra al contenedor */
+    border-radius: 10px;
+}
+
+.card-items {
+    background-color: #fff; /* Color de fondo de las tarjetas */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Asegura que la tarjeta ocupe todo el espacio disponible */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.tamaniocard {
+    height: 30em;
+    width: 23em;
+    margin: 10px; /* Espacio entre tarjetas */
+    display: grid;
+    background-color: #dee5ec; /* Color de fondo de la tarjeta */
+    padding: 20px; /* Espaciado interno de la tarjeta */
+    border: 1px solid #8cb0d4; /* Borde de la tarjeta */
+    border-radius: 10px; /* Bordes redondeados */
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+    overflow: hidden; /* Oculta cualquier contenido desbordado */
+    overflow-y: scroll;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-align: center;
+    overflow: hidden; /* Oculta cualquier contenido desbordado */
+    text-overflow: ellipsis; /* Añade puntos suspensivos al contenido desbordado */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+.card-action {
+    text-align: center; /* Centra los botones horizontalmente */
+}
+
+.boton-container {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    margin-bottom: 1rem; /* Opcional: agrega un margen inferior para separar del siguiente contenido */
+}
+
+.boton {
+    padding: 1rem 2rem; /* Aumenta el padding para agrandar el botón */
+    font-size: 1.25rem; /* Aumenta el tamaño del texto */
+    border-radius: 0.5rem;
+}

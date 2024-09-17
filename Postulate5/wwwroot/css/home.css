@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+.container-home{
+    background: var(--bs-dark-bg-subtle);
+    height: 85vh;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.tit {
+    font-size: 100px;
+    color: #241199;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+.titulo-home {
+    text-align: center;
+    color: #000;
+    font-size: 2.5em;
+
+}
+
+.titulo-home-trabajo {
+    padding-top: 2em;
+    text-align: center;
+    color: #000;
+    font-size: 2.5em;
+
+}
+
+
+
+.sub {
+    margin: 15px 30px 50px 30px;
+    font-size: 30px;
+    color: #000;
+}
