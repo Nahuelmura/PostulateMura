@@ -9,45 +9,38 @@ function CardServicios() {
             console.log(tiposProfesionMostrar);
 
             let contenidoCard = ``;
+
+            contenidoCard += `<div class="row">`; // Usamos row para aplicar el sistema de grilla
+            
             $.each(tiposProfesionMostrar, function (index, tipoProfesion) {
-                contenidoCard += `
-                    <div class="profesion-group">
-                        <h3>${tipoProfesion.nombre}</h3>
-                        <div class="row justify-content-start">`; // Justificación al inicio
-            
-              
-            
-                        $.each(tipoProfesion.listadoPersonas, function (index, persona) {
-                            contenidoCard += `
-                            <div class="col-md-6 col-lg-4 mb-3 d-flex align-items-stretch card-container card-hoover tamanio-card" id="card-${persona.servicioID}">
-                                <div class="card mb-3">
-                                    <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <div class="card-bg color-Card" style="width: 15em; height: 100%;"></div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body">
-                                                <a href="javascript:cargarPerfil(${persona.servicioID})" class="text-decoration-none text-dark">
-                                                    <h5 class="">${persona.nombrePersona} ${persona.apellidoPersona}</h5>
-                                                    <p class=""><strong>Teléfono:</strong> ${persona.telefonoPersona}</p>
-                                                    
-                                                </a>
-                                                <div class="card-action mt-3">
-                                                    <button type="button" class="btn btn-success me-2" onclick="EditarServicio(${persona.servicioID})">
-                                                        <i class="fa-regular fa-pen-to-square"></i> Editar
-                                                    </button>
-                                                    <button type="button" class="btn btn-danger me-2" onclick="EliminarServicio(${persona.servicioID})">
-                                                        <i class="fa-regular fa-trash-can"></i> Eliminar
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
+                $.each(tipoProfesion.listadoPersonas, function (index, persona) {
+                    contenidoCard += `
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3"> <!-- Configuración responsiva de las columnas -->
+                        <div class="card-container card-hoover tamanio-card" id="card-${persona.servicioID}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">${tipoProfesion.nombre}</h5> <!-- Título de la profesión sobre la tarjeta -->
+                                    <a href="javascript:cargarPerfil(${persona.servicioID})" class="text-decoration-none text-dark">
+                                        <h5>${persona.nombrePersona} ${persona.apellidoPersona}</h5>
+                                        <p><strong>Teléfono:</strong> ${persona.telefonoPersona}</p>
+                                    </a>
+                                    <div class="card-action mt-3">
+                                        <button type="button" class="btn btn-success me-2" onclick="EditarServicio(${persona.servicioID})">
+                                            <i class="fa-regular fa-pen-to-square"></i> Editar
+                                        </button>
+                                        <button type="button" class="btn btn-danger me-2" onclick="EliminarServicio(${persona.servicioID})">
+                                            <i class="fa-regular fa-trash-can"></i> Eliminar
+                                        </button>
                                     </div>
                                 </div>
-                            </div>`;
-                        });
-                        contenidoCard += `</div></div>`;
+                            </div>
+                        </div>
+                    </div>`;
+                });
             });
+            
+            contenidoCard += `</div>`; // Cerramos el row
+            
             
             document.getElementById("contenedorCards").innerHTML = contenidoCard;
         },

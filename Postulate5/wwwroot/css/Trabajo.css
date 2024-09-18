@@ -78,7 +78,27 @@
 }
 
 .boton {
-    padding: 1rem 2rem; /* Aumenta el padding para agrandar el botón */
+    padding: 0.5rem 1.5rem; 
     font-size: 1.25rem; /* Aumenta el tamaño del texto */
     border-radius: 0.5rem;
+    background-color: #241199;
+}
+
+
+.tit {
+    font-size: 4em;
+    color: #241199;
+  
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.parrafo_trabajo{
+    text-align: center;
+    color: #241199;
+
+}
+
+.Tamaño_input{
+    height: 6.5em;
+    text-overflow:clip;
 }

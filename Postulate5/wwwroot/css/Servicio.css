@@ -20,9 +20,10 @@
 
 /* Estilo para los botones */
 .boton {
-    padding: 1rem 2rem; 
-    font-size: 1.25rem; 
+    padding: 0.5rem 1.5rem; 
+    font-size: 1.25rem; /* Aumenta el tamaño del texto */
     border-radius: 0.5rem;
+    background-color: #241199;
 }
 
 /* Contenedor card   texto centrado */
@@ -141,4 +142,9 @@
     background-color: #D2E0FB;
 }
   
+
+.parrafo_servicio{
+    text-align: center;
+    color: #241199;
+}
 

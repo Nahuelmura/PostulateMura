@@ -14,40 +14,42 @@ function CardTrabajos() {
                     <div class="profesion-group">
                         <h3 class="text-center">${tipoProfesion.nombre}</h3>
                         <div class="row justify-content-start">`;
-                             $.each(tipoProfesion.listadoPersonas, function (index, persona) {
-                            contenidoCard += `
+                $.each(tipoProfesion.listadoPersonas, function (index, persona) {
+                    contenidoCard += `
                                 <div class="" id="card-${persona.trabajoID}">
                               
-                                        <div class="card mb-3 h-100" >
-                                            <div class="row g-0 h-100">
-                                                <div class="col-md-4">
-                                                    <div class="card-bg color-Card" style="width: 1em; height: 100%;"></div>
-                                                </div>
-                                                <div class="col-md-8 d-flex flex-column ">
-                                                    <div class="card-body flex-grow-1 overflow-auto" style="max-height: 400px;">
-                                                        <p class=""><strong>Nombre:</strong> ${persona.nombrePersona}</p>
-                                                        <p class=""><strong>Apellido:</strong> ${persona.apellidoPersona}</p>
-                                                        <p class=""><strong>Teléfono:</strong> ${persona.telefonoPersona}</p>
-                                                        <p class=""><strong>Dirección:</strong> ${persona.direccion}</p>
-                                                        <p class=""><strong>Descripción:</strong> ${persona.descripcion}</p>
-                                                        <p class=""><strong>Hora:</strong> ${persona.hora}</p>
-                                                        <p class=""><strong>Fecha de inicio:</strong> ${persona.fecha}</p>
-                                                        <p class=""><strong>Comentario:</strong> ${persona.comentario}</p>
+                                     <div class="d-flex justify-content-center">
+                                    <div class="card mb-4 h-100" style="width: 30rem; font-size: 0.9em;">
+                                    <div class="row g-0 h-100">
+                                    <div class="col-md-4">
+                                     <div class="card-bg color-Card" style="width: 1em; height: 100%;"></div>
+                                     </div>
+                                      <div class="col-md-8 d-flex flex-column">
+                                         <div class="card-body flex-grow-1 overflow-auto" style="max-height: 300px;">
+                                          <p class=""><strong><i class="fa-solid fa-person"></i>Nombre:</strong> ${persona.nombrePersona}</p>
+                                          <p class=""><strong> <i class="fa-solid fa-person"></i>Apellido:</strong> ${persona.apellidoPersona}</p>
+                                           <p class=""><strong><i class="fa-solid fa-phone"></i>Teléfono:</strong> ${persona.telefonoPersona}</p>
+                                            <p class=""><strong><i class="fa-solid fa-location-dot"></i>Dirección:</strong> ${persona.direccion}</p>
+                                                <p class=""><strong><i class="fa-solid fa-list"></i></i>Descripción:</strong> ${persona.descripcion}</p>
+                                                 <p class=""><strong><i class="fa-regular fa-clock"></i>Hora:</strong> ${persona.hora}</p>
+                                                   <p class=""><strong><i class="fa-regular fa-calendar"></i>Fecha de inicio:</strong> ${persona.fecha}</p>
+                                                     <p class=""><strong><i class="fa-solid fa-comment"></i>Comentario:</strong> ${persona.comentario}</p>
+                                                        </div>
+                                                         <div class="card-action mt-3">
+                                                              <button type="button" class="btn btn-success me-2" onclick="EditarTrabajo(${persona.trabajoID})">
+                                                                <i class="fa-regular fa-pen-to-square"></i> Editar
+                                                       </button>
+                                                          <button type="button" class="btn btn-danger me-2" onclick="EliminarTrabajo(${persona.trabajoID})">
+                                                          <i class="fa-regular fa-trash-can"></i> Eliminar
+                                                     </button>
                                                     </div>
-                                                    <div class="card-action mt-3">
-                                                        <button type="button" class="btn btn-success me-2" onclick="EditarTrabajo(${persona.trabajoID})">
-                                                            <i class="fa-regular fa-pen-to-square"></i> Editar
-                                                        </button>
-                                                        <button type="button" class="btn btn-danger me-2" onclick="EliminarTrabajo(${persona.trabajoID})">
-                                                            <i class="fa-regular fa-trash-can"></i> Eliminar
-                                                        </button>
-                                                    </div>
                                                 </div>
-                                            </div>
+                                              </div>
+                                             </div>
                                         </div>
                                     </a>
                                 </div>`;
-                        });
+                });
 
                 contenidoCard += `</div></div>`;
             });
@@ -67,10 +69,12 @@ document.addEventListener("DOMContentLoaded", CardTrabajos);
 
 
 function agregarTrabajo() {
+
+  
     let personaID = document.getElementById("PersonaID").value;
     let trabajoID = document.getElementById("TrabajoID").value;
     let profesionID = document.getElementById("ProfesionID").value;
-   
+
     let descripcion = document.getElementById("descripcion").value;
     let direccion = document.getElementById("direccion").value;
     let hora = document.getElementById("hora").value;
@@ -90,6 +94,9 @@ function agregarTrabajo() {
     formData.append("hora", hora);
     formData.append("fecha", fecha);
     formData.append("comentario", comentario);
+
+
+
 
 
     $.ajax({
@@ -115,7 +122,7 @@ function agregarTrabajo() {
 }
 
 
- function EditarTrabajo(TrabajoID) {
+function EditarTrabajo(TrabajoID) {
     $.ajax({
         url: '/Trabajo/RecuperarTrabajo',
         data: { id: TrabajoID },
@@ -125,7 +132,7 @@ function agregarTrabajo() {
             if (trabajos && trabajos.length > 0) {
                 let trabajo = trabajos[0];
 
-                
+
                 ProfesionID
                 document.getElementById("ProfesionID").value = trabajo.profesionID;
                 document.getElementById("TrabajoID").value = trabajo.trabajoID;
