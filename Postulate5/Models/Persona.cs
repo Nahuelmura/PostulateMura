@@ -12,7 +12,8 @@ public class Persona
     public string? Nombre { get; set; }
     public string? Apellido { get; set; }
 
-    
+    public bool Eliminado { get; set; }
+
     public int Edad { get; set; }
     public int Telefono { get; set; }
     public int Documento { get; set; }
@@ -33,6 +34,8 @@ public class VistaTraerDatosPersonal
 
    public string? NombreLocalidad { get; set; }
 
+
+    public bool Eliminado { get; set; }
 
     public string? NombreProvincia { get; set; }
     public string? Nombre { get; set; }

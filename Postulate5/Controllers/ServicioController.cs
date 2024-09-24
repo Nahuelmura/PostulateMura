@@ -36,7 +36,21 @@ namespace Postulate.Controllers
             var personaIDLogueada = personaLogueada?.PersonaID;
             var nombrePersonaLogueada = personaLogueada?.Nombre;
 
+        if (personaLogueada == null)
+    {
 
+
+        
+        return RedirectToAction("Error", "Home"); 
+    }
+
+    // Si la persona está desactivada (Eliminado == true)
+    if (personaLogueada.Eliminado)
+    {
+        // con esto redirigimos a una vista que todavia no esta realizada 
+        ViewBag.Mensaje = "Tu cuenta está desactivada. No tienes acceso a los servicios.";
+        return View("CuentaDesactivada");
+    }
 
             var profesiones = _context.Profesiones.ToList();
             profesiones.Add(new Profesion { ProfesionID = 0, Nombre = "[SELECCIONE...]" });

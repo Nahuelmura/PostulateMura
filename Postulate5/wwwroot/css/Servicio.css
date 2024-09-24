@@ -124,7 +124,7 @@
 }
 
 .textoh3 {
-    font-size: 1.2rem;
+    font-size: 0.5rem;
     color: #333;
 }
 
@@ -148,3 +148,8 @@
     color: #241199;
 }
 
+
+.Tamaño_input{
+    height: 6.5em;
+    text-overflow:clip;
+}

@@ -2,27 +2,96 @@
 @inject SignInManager<IdentityUser> SignInManager
 
 @{
-  ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
 }
 <link rel="stylesheet" href="~/lib/MDB5/css/mdb.min.css" asp-append-version="true" />
+<script src="~/js/VistaPersonaPerfil1.0.0.js"></script>
+<script src="~/js/Persona.1.0.0.js"></script>
 
-<section class="container-home">
-  <h1 class="tit">Postulate.com</h1>
-  <div class="text-center titulo">
-    <main>
-      <h1 class="titulo-home">Bienvenido, @ViewBag.NombrePersona! </h1>
-    </main>
-    <p class="sub">¿Buscas empleo o necesitas contratar servicios? Postúlate con nosotros y conecta con las
-      mejores oportunidades y profesionales en tu área. Ya sea que estés buscando trabajo o necesites ayuda en casa,
-      estamos aquí para facilitarte el proceso. ¡Empieza hoy mismo!</p>
-
-  @* </div>
-  <div style="text-align: center;">
-    <button class="btn-donate">
-      <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </button>
-    <button class="btn-donate">
-      <a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </button>
-  </div> *@
+<section class="container text-center my-5">
+    @* <h1 class="titulo-home">Postulate.com</h1> *@
+    <h1 class="titulo-home display-4">Bienvenido, @ViewBag.NombrePersona!</h1>
+  
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalVistaPersona" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="PersonaID" value="0">
+                <form>
+                    <div class="form-group col-12 Formulario-Nombres">
+                        <label for="LocalidadID" class="form-label text-light">Ciudad</label>
+                        @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="nombre" id="nombre" aria-label="Nombre" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="apellido" id="apellido" aria-label="Apellido" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" placeholder="edad" id="edad" aria-label="Edad" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" placeholder="telefono" id="telefono" aria-label="Teléfono" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" placeholder="documento" id="documento" aria-label="Documento" aria-describedby="basic-addon2">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="GuardarPerfil()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Contenedor para datos de la persona -->
+        <div id="perfilRazorContainer" class="col-md-4">
+           
+            <!-- Aquí puedes incluir otros elementos o datos relacionados con el perfil -->
+            <div id="perfilContainer" class="col-md-12">
+                <!-- Aquí se llenará el contenido dinámico mediante JavaScript -->
+            </div>
+        </div>
+
+        <!-- Contenedor card -->
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <div class="card position-relative tamaño-card">
+                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="card-img-top Alto_imagen" alt="Wild Landscape" style="filter: blur(5px);" />
+                        <div class="card-body position-absolute card_diseño text-white">
+                            <h5 class="card-title">Card title 1</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <div class="card position-relative">
+                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="card-img-top" alt="Wild Landscape" style="filter: blur(5px);" />
+                        <div class="card-body position-absolute  card_diseño text-white">
+                            <h5 class="card-title">Card title 2</h5>
+                        </div>
+                    </div>
+                </div>
+              
+
+                     <p class="posicion_Link_perfil">
+                <a class="Link_perfil" id="forgot-password"
+                    href="@Url.Page("/Account/ForgotPassword", new { area = "Identity" })">¿Quiere cambiar la contraseña?</a>
+            </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

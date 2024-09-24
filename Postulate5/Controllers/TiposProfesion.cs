@@ -93,22 +93,40 @@ public class TiposProfesion : Controller
 return Json(resultado);
 
 }
- public JsonResult  EliminarProfesion (int profesionID)
- {
-
       
 
-     var ProfesionEliminar = _context.Profesiones.Find(profesionID);
-    _context.Remove(ProfesionEliminar);
-    _context.SaveChanges();
-     return Json(ProfesionEliminar);
+public JsonResult EliminarProfesion(int profesionID)
+{
+    bool eliminado = false;
+
+    // Verificar si existen personas asociadas a esta profesión
+    var existePersona = _context.Servicios.Where(t => t.ProfesionID == profesionID).Count();
+
+    // Si no hay personas asociadas, eliminar la profesión
+    if (existePersona == 0)
+    {
+        var profesion = _context.Profesiones.Find(profesionID);
+        
+        // Verificar que la profesión existe
+        if (profesion != null)
+        {
+            _context.Remove(profesion);
+            _context.SaveChanges();
+            eliminado = true;  // Marcar que fue eliminada con éxito
+        }
+    }
+
+    return Json(eliminado);
+}
+    
+
 
 
    
- }
+
+}
+
 
     
 
     
-
-    }

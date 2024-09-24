@@ -15,18 +15,18 @@ function RecuperarPerfilPersonaLogeada() {
             $.each(Personas, function (index, perfil) {
                 contenidoPerfil += `
                     <div class="col-md-12">
-                        <div class="card mb-6">
+                        <div class="card mb-4">
                             <div class="card-header bg-secondary text-white">
                                 Datos personales
                             </div>
                             <div class="card-body">
-                            <p class="textoh3"><strong>Localidad de residencia:</strong> ${perfil.nombreLocalidad}</p>
-                                <p class="textoh3"><strong>Nombre:</strong> ${perfil.nombre}</p>
-                                <p class="textoh3"><strong>Apellido:</strong> ${perfil.apellido}</p>
-                                <p class="textoh3"><strong>Teléfono:</strong> ${perfil.telefono}</p>
-                                <p class="textoh3"><strong>Edad:</strong> ${perfil.edad}</p>
-                                <p class="textoh3"><strong>Documento:</strong> ${perfil.documento}</p>
-                                <p class="textoh3"><strong>Email:</strong> ${perfil.email}</p>
+                            <p class="texto3"><strong>Localidad de residencia:</strong> ${perfil.nombreLocalidad}</p>
+                                <p class="texto3"><strong>Nombre:</strong> ${perfil.nombre}</p>
+                                <p class="texto3"><strong>Apellido:</strong> ${perfil.apellido}</p>
+                                <p class="texto3"><strong>Teléfono:</strong> ${perfil.telefono}</p>
+                                <p class="texto3"><strong>Edad:</strong> ${perfil.edad}</p>
+                                <p class="texto3"><strong>Documento:</strong> ${perfil.documento}</p>
+                                <p class="texto3"><strong>Email:</strong> ${perfil.email}</p>
                                 <div class="button-group mt-3">
                                     <button type="button" class="btn btn-primary" onclick="EditarPefil(${perfil.personaID})">
                                         Editar

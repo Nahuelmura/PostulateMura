@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Postulate.Data;
 using Postulate.Models;
@@ -25,6 +26,8 @@ namespace Postulate.Controllers
 
         public async Task<IActionResult> Index()
         {
+
+
             var usuarioLogueadoID = _userManager.GetUserId(HttpContext.User);
             // OBJETO PARA PASARLO A VISTA PARA MOSTRAR QUE FUNCIONA
             ViewBag.UsuarioID = usuarioLogueadoID;
@@ -32,6 +35,15 @@ namespace Postulate.Controllers
             // Obtener el correo del usuario logueado
             var usuarioLogueado = await _userManager.GetUserAsync(HttpContext.User);
             var correoUsuarioLogueado = usuarioLogueado?.Email;
+
+
+            var localidades = _context.Localidades.ToList();
+            var localidadesBuscar = localidades.ToList();
+            localidades.Add(new Localidad { LocalidadID = 0, Nombre = "[SELECCIONE...]" });
+            localidadesBuscar.Add(new Localidad { LocalidadID = 0, Nombre = "[TODAS LAS LOCALIDADES]" });
+
+            ViewBag.LocalidadID = new SelectList(localidades.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
+            ViewBag.LocalidadBuscarID = new SelectList(localidadesBuscar.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
 
             // Buscar la persona con el correo del usuario logueado
             var persona = await _context.Personas.FirstOrDefaultAsync(p => p.Email == correoUsuarioLogueado);

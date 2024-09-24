@@ -110,6 +110,8 @@ public class PersonaController : Controller
             {
                 var Nuevousuario = new Persona
                 {
+
+                    Eliminado = false,
                     LocalidadID = localidadId,
                     Nombre = nombre,
                     Apellido = apellido,
@@ -117,6 +119,7 @@ public class PersonaController : Controller
                     Telefono = telefono,
                     Documento = documento,
                     Email = correo
+                
                 };
                 _context.Personas.Add(Nuevousuario);
                 _context.SaveChanges();
@@ -177,6 +180,7 @@ public class PersonaController : Controller
             Edad = p.Edad,
             Documento = p.Documento,
             Email = p.Email,
+             Eliminado = p.Eliminado 
         }).ToList();
 
         return Json(personaMostrar);
@@ -224,6 +228,32 @@ public class PersonaController : Controller
 
         return Json(resultado);
     }
+
+
+        public JsonResult DesactivarActivarPersona(int PersonaID, int Accion)
+        {
+             Persona persona = _context. Personas.Find(PersonaID);
+            if (Accion == 1)
+            {
+                persona.Eliminado = true;
+            }
+            else
+            {
+                persona.Eliminado = false;
+            }
+            _context.SaveChanges();
+            return Json(true);
+        }
+    
+
+
+  
+
+ 
+
+
+
+
 
 
 

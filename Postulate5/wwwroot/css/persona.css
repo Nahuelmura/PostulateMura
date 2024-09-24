@@ -29,3 +29,33 @@
     margin-top: 50em;
     text-decoration: none;
 }
+
+
+
+
+@media (max-width: 550px) {
+    .ocultar-en-550px {
+        display: none;
+    }
+}
+@media (max-width: 768px) {
+    .ocultar-en-768px {
+        display: none;
+    }
+}
+
+
+.fila-desactivada {
+    background-color: #f8d7da;  /* Rojo claro */
+    color: #721c24;             /* Rojo oscuro */
+}
+
+.fila-activa {
+    background-color: #d4edda;  /* Verde claro */
+    color: #155724;             /* Verde oscuro */
+}
+
+
+.texto3{
+    font-size: 1.7em;
+}

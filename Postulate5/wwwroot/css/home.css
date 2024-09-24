@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
 
+@media (max-width: 768px) {
+    .titulo-home {
+        font-size: 1.5em; /* Tamaño más pequeño para pantallas más pequeñas */
+    }
+}
+
+
 .container-home{
     background: var(--bs-dark-bg-subtle);
-    height: 85vh;
+    height: 100vh;
     width: 100%;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
@@ -37,4 +44,49 @@
     margin: 15px 30px 50px 30px;
     font-size: 30px;
     color: #000;
+}
+
+
+.ubicacion_contenedor{
+    margin-right: 7em; /* Ajusta el valor según sea necesario */    
+}
+
+
+.card_diseño
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    filter: blur(1px);
+    
+
+
+}
+
+.tamaño-card {
+    height: 400px;
+width: auto;
+   
+}
+
+
+
+.card_agrandada {
+    transform: scale(1); /* Ajusta el tamaño de la tarjeta */
+    transition: transform 0.3s ease; /* Agrega una transición suave */
+}
+
+.card_agrandada:hover {
+    transform: scale(1.1); /* Aumenta aún más cuando pases el cursor */
+}
+
+
+.Alto_imagen{
+    height: 5em;
 }

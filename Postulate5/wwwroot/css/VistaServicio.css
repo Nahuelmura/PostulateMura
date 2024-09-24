@@ -37,4 +37,17 @@ font-size: 2em;
     font-size: 2em;
     text-align: center;
 }
+
+.input{
+    align-items: center;
+}
   
+.input_Buqueda{
+  text-align: center;
+    font-size: 1.5em;
+}
+
+.ubicacion_input{
+    text-align: center;
+}
+

@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="~/css/modals.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/persona.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/servicio.css" asp-append-version="true" />
+      <link rel="stylesheet" href="~/css/Provincia.css" asp-append-version="true" />
+            <link rel="stylesheet" href="~/css/VistaServicio.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/administracion.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Postulate.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/MDB5/css/mdb.min.css" asp-append-version="true" />
@@ -57,9 +59,19 @@
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" asp-area="" asp-controller="Servicios" asp-action="Index">
                                 <i class="lni lni-agenda"></i>
-                                <span class="titulo-navbar">Servicios</span>
+                                <span class="titulo-navbar"> Mis Servicios</span>
                             </a>
                         </li>
+
+                          <li class="nav-item">
+                           <a class="nav-link mx-lg-2" asp-area="" asp-controller="VistaServicio" asp-action="Index">
+                                <i class="lni lni-agenda"></i>
+                                <span class="titulo-navbar"> Todos los Servicios</span>
+                            </a>
+                        </li>
+
+
+
                         <li class="nav-item">
                             <a class="nav-link mx-lg-2" asp-area="" asp-controller="Trabajo" asp-action="Index">
                                 <i class="lni lni-cog"></i>

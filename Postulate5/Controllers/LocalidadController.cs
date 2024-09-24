@@ -38,27 +38,27 @@ public class LocalidadController : Controller
         return View("Localidad");
     }
 
-    public JsonResult ListadoLocalidad(int? id,int? ProvinciaBuscarID)
+    public JsonResult ListadoLocalidad(int? id, int? ProvinciaBuscarID)
     {
         var localidad = _context.Localidades.Include(t => t.Provincia).ToList();
-          if (id != null)
+        if (id != null)
         {
             localidad = localidad.Where(t => t.LocalidadID == id).ToList();
         }
-        if (ProvinciaBuscarID != null && ProvinciaBuscarID !=0 ) 
+        if (ProvinciaBuscarID != null && ProvinciaBuscarID != 0)
         {
-            localidad = localidad.Where(t => t.ProvinciaID == ProvinciaBuscarID).ToList(); 
+            localidad = localidad.Where(t => t.ProvinciaID == ProvinciaBuscarID).ToList();
         }
 
-        var localidadMostrar = localidad.Select ( e => new VistaLocalidades 
+        var localidadMostrar = localidad.Select(e => new VistaLocalidades
         {
             LocalidadID = e.LocalidadID,
             ProvinciaID = e.ProvinciaID,
             ProvinciaNombre = e.Provincia.Nombre,
             Nombre = e.Nombre,
-         
+
             CodigoPostal = e.CodigoPostal,
-            
+
 
         }).ToList();
 
@@ -70,7 +70,7 @@ public class LocalidadController : Controller
     public IActionResult GuardarLocalidad(int provinciaID, int localidadID, string nombre, int codigoPostal)
     {
         string resultado = "";
-    
+
         if (!String.IsNullOrEmpty(nombre))
         {
             if (localidadID == 0)
@@ -129,24 +129,29 @@ public class LocalidadController : Controller
 
     }
 
-     public JsonResult  EliminarLocalidad (int localidadID)
- {
+  public JsonResult EliminarLocalidad(int localidadID)
+{
+    bool eliminado = false;
 
-      
+    // Verificar si existen personas asociadas a esta localidad
+    var existeLocalidad = _context.Personas.Where(t => t.LocalidadID == localidadID).Count();
 
-     var localidadEliminar = _context.Localidades.Find(localidadID);
-    _context.Remove(localidadEliminar);
-    
-    _context.SaveChanges();
-     return Json(true);
+    // Si no hay personas asociadas, eliminar la localidad
+    if (existeLocalidad == 0)
+    {
+        var localidad = _context.Localidades.Find(localidadID);
+        
+        // Verificar que la localidad existe
+        if (localidad != null)
+        {
+            _context.Remove(localidad);
+            _context.SaveChanges();
+            eliminado = true;  // Marcar que fue eliminado con éxito
+        }
+    }
 
-
-   
- }
-
-
-
-
+    return Json(eliminado);
+}
 
 
 }

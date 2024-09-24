@@ -4,16 +4,19 @@
 
 <body>
 
+<h1 class="tit"> Todos los Servicios <i class="fa-solid fa-toolbox"></i></h1>
+<p class="parrafo_servicio"><i class="fa-solid fa-exclamation"></i> En esta seccion se encuentan Todos los servicios los usuarios Logeados</p>
 
-<div class="col-md-6">
-    <label for="ProfesionID" class="form-label"> Buscar Profesión</label>
-    @Html.DropDownList("profesionBuscarID", ViewBag.ProfesionID as SelectList, htmlAttributes: new
-    {
-        @class = "form-control",
-        @onchange = "CardServicios()" // Asegúrate de que este evento esté llamando a la función
-    })
+<div class="input d-flex justify-content-center">
+    <div class="col-md-6 input_Buqueda">
+        <label for="ProfesionID" class="form-label titulo_input">Buscar Profesión Interesada</label>
+        @Html.DropDownList("profesionBuscarID", ViewBag.ProfesionID as SelectList, htmlAttributes: new
+        {
+            @class = "form-control ubicacion_input",
+            @onchange = "CardServicios()" // Asegúrate de que este evento esté llamando a la función
+        })
+    </div>
 </div>
-
     <div class="conte">
         <div class="contenedor-card card id=" ServicioID">
 
