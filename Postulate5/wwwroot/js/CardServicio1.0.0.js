@@ -10,12 +10,14 @@ function CardServicios() {
 
             let contenidoCard = ``;
 
-            contenidoCard += `<div class="row">`; // Usamos row para aplicar el sistema de grilla
+            contenidoCard += `<div class="row">`;// Usamos row para aplicar el sistema de grilla
+           let ServicioEncontrados = false;  
             
             $.each(tiposProfesionMostrar, function (index, tipoProfesion) {
+                ServicioEncontrados = true;  
                 $.each(tipoProfesion.listadoPersonas, function (index, persona) {
                     contenidoCard += `
-                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3"> <!-- Configuración responsiva de las columnas -->
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3 cartas_card"> <!--  responsivIDAD de las columnas -->
                         <div class="card-container card-hoover tamanio-card" id="card-${persona.servicioID}">
                             <div class="card">
                                 <div class="card-body">
@@ -25,9 +27,7 @@ function CardServicios() {
                                         <p><strong>Teléfono:</strong> ${persona.telefonoPersona}</p>
                                     </a>
                                     <div class="card-action mt-3">
-                                        <button type="button" class="btn btn-success me-2" onclick="EditarServicio(${persona.servicioID})">
-                                            <i class="fa-regular fa-pen-to-square"></i> Editar
-                                        </button>
+                                      
                                         <button type="button" class="btn btn-danger me-2" onclick="EliminarServicio(${persona.servicioID})">
                                             <i class="fa-regular fa-trash-can"></i> Eliminar
                                         </button>
@@ -40,6 +40,13 @@ function CardServicios() {
             });
             
             contenidoCard += `</div>`; // Cerramos el row
+
+            if (!ServicioEncontrados) {
+                contenidoCard = `
+                    <div class="alert alert-warning text-center" role="alert">
+                        No hay Servicios suyos postulados..
+                    </div>`;
+            }
             
             
             document.getElementById("contenedorCards").innerHTML = contenidoCard;
@@ -53,20 +60,40 @@ function CardServicios() {
 document.addEventListener("DOMContentLoaded", CardServicios);
 
 function EliminarServicio(servicioID) {
-    $.ajax({
-        // la URL para la petición
-        url: '../../Servicios/EliminarServicio',
-        data: { servicioID: servicioID },
-        type: 'POST',
-        dataType: 'json',
-        success: function (Respuesta) {
-            CardServicios();
-        },
-        error: function (xhr, status) {
-            console.log('Disculpe, existió un problema al consultar el registro para eliminado');
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "¡No podrás revertir esto!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminarlo!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '../../Servicios/EliminarServicio',
+                data: { servicioID: servicioID },
+                type: 'POST',
+                dataType: 'json',
+                success: function (Respuesta) {
+                    // Llama a CardServicios para actualizar la lista
+                    CardServicios();
+
+                    // Muestra un mensaje de éxito
+                    Swal.fire({
+                        title: "¡Eliminado!",
+                        text: "El servicio ha sido eliminado.",
+                        icon: "success"
+                    });
+                },
+                error: function (xhr, status) {
+                    console.log('Disculpe, existió un problema al consultar el registro para eliminar');
+                }
+            });
         }
     });
 }
+
 
 function cargarPerfil(servicioID) {
 

@@ -8,51 +8,52 @@ function CardTrabajos() {
             console.log(tiposProfesionMostrar);
 
             let contenidoCard = ``;
+            contenidoCard += `<div class="row">`; 
+
+            let trabajosEncontrados = false; 
 
             $.each(tiposProfesionMostrar, function (index, tipoProfesion) {
-                contenidoCard += `
-                    <div class="profesion-group">
-                        <h3 class="text-center">${tipoProfesion.nombre}</h3>
-                        <div class="row justify-content-start">`;
-                $.each(tipoProfesion.listadoPersonas, function (index, persona) {
-                    contenidoCard += `
-                                <div class="" id="card-${persona.trabajoID}">
-                              
-                                     <div class="d-flex justify-content-center">
-                                    <div class="card mb-4 h-100" style="width: 30rem; font-size: 0.9em;">
-                                    <div class="row g-0 h-100">
-                                    <div class="col-md-4">
-                                     <div class="card-bg color-Card" style="width: 1em; height: 100%;"></div>
-                                     </div>
-                                      <div class="col-md-8 d-flex flex-column">
-                                         <div class="card-body flex-grow-1 overflow-auto" style="max-height: 300px;">
-                                          <p class=""><strong><i class="fa-solid fa-person"></i>Nombre:</strong> ${persona.nombrePersona}</p>
-                                          <p class=""><strong> <i class="fa-solid fa-person"></i>Apellido:</strong> ${persona.apellidoPersona}</p>
-                                           <p class=""><strong><i class="fa-solid fa-phone"></i>Teléfono:</strong> ${persona.telefonoPersona}</p>
-                                            <p class=""><strong><i class="fa-solid fa-location-dot"></i>Dirección:</strong> ${persona.direccion}</p>
-                                                <p class=""><strong><i class="fa-solid fa-list"></i></i>Descripción:</strong> ${persona.descripcion}</p>
-                                                 <p class=""><strong><i class="fa-regular fa-clock"></i>Hora:</strong> ${persona.hora}</p>
-                                                   <p class=""><strong><i class="fa-regular fa-calendar"></i>Fecha de inicio:</strong> ${persona.fecha}</p>
-                                                     <p class=""><strong><i class="fa-solid fa-comment"></i>Comentario:</strong> ${persona.comentario}</p>
-                                                        </div>
-                                                         <div class="card-action mt-3">
-                                                              <button type="button" class="btn btn-success me-2" onclick="EditarTrabajo(${persona.trabajoID})">
-                                                                <i class="fa-regular fa-pen-to-square"></i> Editar
-                                                       </button>
-                                                          <button type="button" class="btn btn-danger me-2" onclick="EliminarTrabajo(${persona.trabajoID})">
-                                                          <i class="fa-regular fa-trash-can"></i> Eliminar
-                                                     </button>
-                                                    </div>
-                                                </div>
-                                              </div>
-                                             </div>
+                
+                if (tipoProfesion.listadoPersonas && tipoProfesion.listadoPersonas.length > 0) {
+                    trabajosEncontrados = true; 
+                    $.each(tipoProfesion.listadoPersonas, function (index, persona) {
+                        contenidoCard += `
+                            <div class="col-md-4 mb-3 cartas_card" id="card-${persona.trabajoID}"> <!-- col-md-4 para tener 3 por fila en pantallas medianas o más grandes -->
+                                <div class="card card h-100"> <!-- Establecemos una altura mínima y uso de flex -->
+                                    <div class="row g-0 h-100"">
+                                        <h5 class="card-title text-center">${tipoProfesion.nombre}</h5> <!-- Título de la profesión dentro de la tarjeta -->
+                                        <p><strong><i class="fa-solid fa-person"></i> Nombre:</strong> ${persona.nombrePersona}</p>
+                                        <p><strong><i class="fa-solid fa-person"></i> Apellido:</strong> ${persona.apellidoPersona}</p>
+                                        <p><strong><i class="fa-solid fa-phone"></i> Teléfono:</strong> ${persona.telefonoPersona}</p>
+                                        <p><strong><i class="fa-solid fa-location-dot"></i> Dirección:</strong> ${persona.direccion}</p>
+                                        <p><strong><i class="fa-solid fa-list"></i> Descripción:</strong> ${persona.descripcion}</p>
+                                        <p><strong><i class="fa-regular fa-clock"></i> Hora:</strong> ${persona.horastring}</p>
+                                        <p><strong><i class="fa-regular fa-calendar"></i> Fecha de inicio:</strong> ${persona.fechastring}</p>
+                                        <p><strong><i class="fa-solid fa-comment"></i> Comentario:</strong> ${persona.comentario}</p>
+                                        <div class="card-action mt-auto"> <!-- Utiliza mt-auto para empujar el contenido al final -->
+                                            <button type="button" class="btn btn-success me-2" onclick="EditarTrabajo(${persona.trabajoID})">
+                                                <i class="fa-regular fa-pen-to-square"></i> Editar
+                                            </button>
+                                            <button type="button" class="btn btn-danger me-2" onclick="EliminarTrabajo(${persona.trabajoID})">
+                                                <i class="fa-regular fa-trash-can"></i> Eliminar
+                                            </button>
                                         </div>
-                                    </a>
-                                </div>`;
-                });
-
-                contenidoCard += `</div></div>`;
+                                    </div>
+                                </div>
+                            </div>`;
+                    });
+                }
             });
+
+            contenidoCard += `</div>`; // Cerramos el row
+
+            // Si no se encontraron trabajos, mostramos el mensaje
+            if (!trabajosEncontrados) {
+                contenidoCard = `
+                    <div class="alert alert-warning text-center" role="alert">
+                        No hay trabajos suyos postulados ni asociados a sus servicios.
+                    </div>`;
+            }
 
             document.getElementById("contenedorCards").innerHTML = contenidoCard;
         },
@@ -61,6 +62,7 @@ function CardTrabajos() {
         }
     });
 }
+
 
 
 // Llama a la función para cargar las tarjetas al cargar la página
@@ -155,17 +157,38 @@ function EditarTrabajo(TrabajoID) {
 
 
 function EliminarTrabajo(trabajoID) {
-    $.ajax({
-        // la URL para la petición
-        url: '../../Trabajo/EliminarTrabajo',
-        data: { trabajoID: trabajoID },
-        type: 'POST',
-        dataType: 'json',
-        success: function (Respuesta) {
-            CardTrabajos();
-        },
-        error: function (xhr, status) {
-            console.log('Disculpe, existió un problema al consultar el registro para eliminado');
+    Swal.fire({
+        title: "Quiere eliminar este trabajo?",
+        text: "Esta accion no podra ser revertida!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, quiero eliminar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '../../Trabajo/EliminarTrabajo',
+                data: { trabajoID: trabajoID },
+                type: 'POST',
+                dataType: 'json',
+                success: function (Respuesta) {
+                    // Llama a CardTrabajos para actualizar la lista
+                    CardTrabajos();
+                    
+                    // Muestra un mensaje de éxito
+                    Swal.fire({
+                        title: "!Eliminado",
+                        text: "Su trabajo fue eliminado.",
+                        icon: "success"
+                    });
+                },
+                error: function (xhr, status) {
+                    console.log('Disculpe, existió un problema al consultar el registro para eliminado');
+                }
+            });
         }
     });
 }
+
+

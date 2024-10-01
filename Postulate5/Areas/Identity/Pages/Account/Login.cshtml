@@ -6,11 +6,15 @@
 }
 
 <style>
-body{
-    background: url('/img/1567677.jpg') no-repeat;
+body {
+    background: url('/img/Obrero1.jpg') no-repeat;
     background-size: cover;
     height: 100vh;
+    transition: background 1s ease-in-out; /* Suaviza la transición entre imágenes */
 }
+
+
+
 @* body{
 background: #8E2DE2;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
@@ -24,7 +28,8 @@ background: linear-gradient(to right, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, F
 <section id="login">
     <div class="login-box">
             <form id="cuenta" method="post">
-                <h2 class="h2l">Login</h2>
+                <h2 class="h2l">Postulate.Com</h2>
+                <h3 class="h3l">Logeo</h3>
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="input-box">
                     <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"/>
@@ -134,4 +139,23 @@ background: linear-gradient(to right, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, F
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+    const images = [
+        '/img/Obrero1.jpg',
+        '/img/obrero2.jpg',
+        '/img/obrero3.jpeg',
+        '/img/obrero4.jpg',
+        '/img/obrero5.jpeg',
+    ];
+
+    let currentIndex = 0;
+
+    function changeBackground() {
+        currentIndex = (currentIndex + 1) % images.length; // Cambia al siguiente índice
+        document.body.style.backgroundImage = `url('${images[currentIndex]}')`;
+    }
+
+    setInterval(changeBackground, 5000); // Cambia la imagen cada 5 segundos
+</script>
 }

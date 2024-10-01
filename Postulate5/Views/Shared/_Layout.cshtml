@@ -1,6 +1,9 @@
 ﻿@{
     var currentAction = ViewContext.ActionDescriptor.DisplayName;
     var hideSidebar = currentAction.Contains("Login") || currentAction.Contains("Register");
+    @using Microsoft.AspNetCore.Identity
+    @inject SignInManager<IdentityUser> SignInManager
+
 }
 
 <!DOCTYPE html>
@@ -12,14 +15,14 @@
     <title>@ViewData["Title"] - Postulate</title>
     <link rel="icon" href="~/img/icono.ico" type="image/x-icon">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/fontawesome/css/all.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/modals.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/persona.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/servicio.css" asp-append-version="true" />
-      <link rel="stylesheet" href="~/css/Provincia.css" asp-append-version="true" />
-            <link rel="stylesheet" href="~/css/VistaServicio.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Provincia.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/VistaServicio.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/administracion.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Postulate.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/MDB5/css/mdb.min.css" asp-append-version="true" />
@@ -33,86 +36,114 @@
     <header></header>
     @if (!hideSidebar)
     {
-<header class="encabezado">
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand me-auto" style="color:#241199" href="#">Postulate</a>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Postulate</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                        <li class="nav-item">
+        <header class="encabezado">
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <div class="container-fluid">
+                    <a class="navbar-brand me-auto" style="color:#241199" href="#">Postulate</a>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Postulate</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                                @* <li class="nav-item">
                             <a class="nav-link mx-lg-2" asp-area="" asp-controller="home" asp-action="Index">
-                                <i class="lni lni-home"></i>
-                                <span class="titulo-navbar">Home</span>
+                            <i class="lni lni-home"></i>
+                            <span class="titulo-navbar">Home</span>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" asp-area="" asp-controller="Persona" asp-action="Index">
-                                <i class="lni lni-user"></i>
-                                <span>Usuario</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" asp-area="" asp-controller="Servicios" asp-action="Index">
-                                <i class="lni lni-agenda"></i>
-                                <span class="titulo-navbar"> Mis Servicios</span>
-                            </a>
-                        </li>
+                            </li> *@
+                                <li class="nav-item">
+                                    <a class="nav-link mx-lg-2" asp-area="" asp-controller="Persona" asp-action="Index">
+                                        <i class="lni lni-user"></i>
+                                        <span>Usuario</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mx-lg-2" asp-area="" asp-controller="Servicios" asp-action="Index">
+                                        <i class="lni lni-agenda"></i>
+                                        <span class="titulo-navbar"> Mis Servicios</span>
+                                    </a>
+                                </li>
 
-                          <li class="nav-item">
-                           <a class="nav-link mx-lg-2" asp-area="" asp-controller="VistaServicio" asp-action="Index">
-                                <i class="lni lni-agenda"></i>
-                                <span class="titulo-navbar"> Todos los Servicios</span>
-                            </a>
-                        </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mx-lg-2" asp-area="" asp-controller="VistaServicio"
+                                        asp-action="Index">
+                                        <i class="lni lni-agenda"></i>
+                                        <span class="titulo-navbar"> Todos los Servicios</span>
+                                    </a>
+                                </li>
 
 
 
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" asp-area="" asp-controller="Trabajo" asp-action="Index">
-                                <i class="lni lni-cog"></i>
-                                <span class="titulo-navbar">Trabajos</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link mx-lg-2 dropdown-toggle" style="color:#241199" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Administracion
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Localidad" asp-action="Index">Localidad</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Provincia" asp-action="Index">Provincias</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="TiposProfesion" asp-action="Index">Tipos de Profesion</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Persona" asp-action="VistaPersona">Administrar cuentas </a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link mx-lg-2" asp-area="" asp-controller="Trabajo" asp-action="Index">
+                                        <i class="lni lni-cog"></i>
+                                        <span class="titulo-navbar">Trabajos</span>
+                                    </a>
+                                </li>
+
+
+
+                                    <li class="nav-item">
+                                      <a class="nav-link mx-lg-2" asp-area="" asp-controller="VistaTrabajo" asp-action="Index">
+                                      <i class="lni lni-cog"></i>
+                                        <span class="titulo-navbar">Todos los Trabajos</span>
+                                                               </a>
+                                                            </li>
+
+
+                                    @if (User.IsInRole("ADMINISTRADOR"))
+                        {      
+
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link mx-lg-2 dropdown-toggle" style="color:#241199" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Administracion
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Localidad"
+                                                asp-action="Index">Localidad</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Provincia"
+                                                asp-action="Index">Provincias</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="TiposProfesion"
+                                                asp-action="Index">Tipos de Profesion</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Persona"
+                                                asp-action="VistaPersona">Administrar cuentas </a></li>
+                                    </ul>
+                                </li>
+
+                          }
+
+
+                                @* <li class="nav-item dropdown">
+                                    <a class="nav-link mx-lg-2 dropdown-toggle" style="color:#241199;" href="#"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Vistas
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="VistaServicio"
+                                                asp-action="Index">Vista Servicios</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="VistaTrabajo"
+                                                asp-action="Index">Vista Trabajos</a></li>
+                                        @* <li><a class="dropdown-item" asp-area="" asp-controller="Persona"
+                                    asp-action="VistaPersonaPerfil">Perfil </a></li> *@
+
+                                    @* </ul>
+                                </li> *@ 
                             </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link mx-lg-2 dropdown-toggle" style="color:#241199;" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Vistas
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="VistaServicio" asp-action="Index">Vista Servicios</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="VistaTrabajo" asp-action="Index">Vista Trabajos</a></li>
-                                  <li><a class="dropdown-item" asp-area="" asp-controller="Persona" asp-action="VistaPersonaPerfil">Perfil </a></li>
-                                
-                            </ul>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                    <a class="login-button text-light" asp-area="Identity" asp-page="/Account/Logout"
+                        asp-route-returnUrl="@Url.Action("Index","Home", new { area = "" })">Salir</a>
+                    <button class="navbar-toggler pe-3" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
-            </div>
-            <a class="login-button text-light" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index","Home", new { area = "" })">Logout</a>
-            <button class="navbar-toggler pe-3" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </nav>
-    </header>
+            </nav>
+        </header>
     }
     <div class="main-content">
         <main role="main" class="pb-3">

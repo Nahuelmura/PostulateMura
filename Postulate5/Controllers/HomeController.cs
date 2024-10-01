@@ -8,6 +8,7 @@ using Postulate.Data;
 using Postulate.Models;
 
 namespace Postulate.Controllers
+
 {
     public class HomeController : Controller
     {
@@ -43,7 +44,7 @@ namespace Postulate.Controllers
             localidadesBuscar.Add(new Localidad { LocalidadID = 0, Nombre = "[TODAS LAS LOCALIDADES]" });
 
             ViewBag.LocalidadID = new SelectList(localidades.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
-            ViewBag.LocalidadBuscarID = new SelectList(localidadesBuscar.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
+            ViewBag.LocalidadID = new SelectList(localidadesBuscar.OrderBy(c => c.Nombre), "LocalidadID", "Nombre");
 
             // Buscar la persona con el correo del usuario logueado
             var persona = await _context.Personas.FirstOrDefaultAsync(p => p.Email == correoUsuarioLogueado);

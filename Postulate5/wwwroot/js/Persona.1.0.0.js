@@ -20,8 +20,7 @@ function Guardar() {
     }
     if ($("#LocalidadID").val() === "") {
         $("#LocalidadID").after('<div class="error-message text-danger">El campo Localidad no puede estar vacío.</div>');
-        if (isValid) $("#LocalidadID").focus(); // Solo enfocar si es el primer error
-        isValid = false;
+        if (isValid) $("#LocalidadID").focus(); 
     }
     if ($("#nombre").val() === "") {
         $("#nombre").after('<div class="error-message text-danger">El campo Nombre no puede estar vacío.</div>');
@@ -54,6 +53,7 @@ function Guardar() {
 
 function enviarFormularioAjax() {
     let formulario = $("#formulario").serialize(); // Serializa el formulario
+    console.log(formulario); // Agrega esta línea para verificar el contenido del formulario
 
     $.ajax({
         url: '../../Persona/Guardar',
@@ -62,12 +62,10 @@ function enviarFormularioAjax() {
         dataType: 'json',
         success: function(resultado) {
             console.log("Formulario guardado exitosamente");
-            
             // Mostrar mensaje de éxito
             $("#formulario").fadeOut("slow", function() {
-                // Agregar el mensaje tras el fadeOut
                 $("#mensajeExito").html('<div class="alert  Felicitaciones" role="alert">Felicidades, usted es un nuevo usuario de Postulate.Com</div>');
-                $("#mensajeExito").fadeIn("slow"); // Mostrar el mensaje con efecto fadeIn
+                $("#mensajeExito").fadeIn("slow");
             });
         },
         error: function(xhr, status) {
@@ -75,7 +73,6 @@ function enviarFormularioAjax() {
         }
     });
 }
-
 
 
 

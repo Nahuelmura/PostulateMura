@@ -10,11 +10,19 @@
 </head>
 
 <body>
-    <!-- Botón para abrir el modal de agregar trabajo -->
-    <div class="boton-container">
-        <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#agregarTrabajo">Agregar
-            Servicio</button>
+   <h1 class="tit"><i class="fa-solid fa-pencil"></i> Todos los Trabajos <i class="fa-solid fa-hammer"></i></h1>
+   <p class="parrafo_servicio"><i class="fa-solid fa-exclamation"></i> En esta seccion se encuentan Todos los Trabajos propuestos y no acordados de  los usuarios Logeados</p>
+   <div class="input d-flex justify-content-center">
+    <div class="col-md-6 input_Buqueda">
+        <label for="ProfesionID" class="form-label titulo_input">Buscar Profesión Interesada</label>
+        @Html.DropDownList("profesionBuscarID", ViewBag.ProfesionID as SelectList, htmlAttributes: new
+        {
+            @class = "form-control ubicacion_input",
+            @onchange = "CardTrabajos()" 
+        })
     </div>
+</div>
+    
     <!-- Contenedor principal de las tarjetas -->
     <div class="contenedor-card" id="TrabajoID">
         <div id="contenedorCards" class="row"></div>

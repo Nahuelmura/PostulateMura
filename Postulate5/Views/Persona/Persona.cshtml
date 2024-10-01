@@ -3,69 +3,69 @@
     var correoUsuarioLogueado = ViewBag.CorreoUsuarioLogueado as string;
 }
 <section class="conteiner-persona">
-    <h1 class="titulo">Ingresar datos personales</h1>
+  
 
-    <div class="Contenedor-formulario">
-        <div class="row">
-            <div class="col-6">
-                <form id="formulario">
-                    <div class="row">
-                        <input type="hidden" id="PersonaID" value="0" />
-                        <div class="form-group col-12 Formulario-Nombres">
-                            <label for="ProvinciaID" class="form-label text-light">Provincia</label>
-                            @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
-                        </div>
-                        <div class="form-group col-12 Formulario-Nombres">
-                            <label for="LocalidadID" class="form-label text-light">Ciudad</label>
-                            @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
-                        </div>
-                        <div class="form-group col-12 Formulario-Nombres">
-                            <label for="nombre" class="form-label text-light">Ingresar Nombre</label>
-                            <input type="text" id="nombre" name="nombre" class="form-control"
-                                placeholder="Ingresar Nombre">
-                        </div>
-                        <div class="form-group col-12 Formulario-Nombres">
-                            <label for="apellido" class="form-label text-light">Ingresar Apellido</label>
-                            <input type="text" id="apellido" name="apellido" class="form-control"
-                                placeholder="Apellido">
-                        </div>
-                        <div class="form-group col-12 Formulario-Nombres">
-                            <label for="edad" class="form-label text-light">Ingresar Edad</label>
-                            <input type="number" name="edad" id="edad" class="form-control" placeholder="Edad">
-                        </div>
-                        <div class="form-group col-12 Formulario-Nombres">
-                            <label for="telefono" class="form-label text-light">Ingresar Teléfono</label>
-                            <input type="number" id="telefono" name="telefono" class="form-control"
-                                placeholder="Teléfono">
-                        </div>
-                        <div class="form-group col-12 Formulario-Nombres">
-                            <label for="documento" class="form-label text-light">Ingresar Documento</label>
-                            <input type="number" id="documento" name="documento" class="form-control"
-                                placeholder="Documento">
-                        </div>
-                        <div class="form-group col-12 Formulario-Nombres">
-                            <label for="correo" class="form-label text-light">Ingresar Correo</label>
-                            <input type="email" id="correo" name="correo" value="@correoUsuarioLogueado"
-                                class="form-control" readonly />
-                        </div>
-                        <div class="form-group col-12 Formulario-Nombres">
-                            <button type="submit" class="btn btn-secondary">Guardar</button>
-                        </div>
+<div class="Contenedor-formulario">
+       <h1 class="titulo"> Bienvenido a Postulate.Com</h1>
+       <h1 class="titulo">Ingresar datos personales</h1>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <form id="formulario">
+                <div class="row">
+                    <input type="hidden" id="PersonaID" value="0" />
+                    <div class="form-group col-12 Formulario-Nombres">
+                        <label for="ProvinciaID" class="form-label text-light">Provincia</label>
+                        @Html.DropDownList("ProvinciaID", null, htmlAttributes: new { @class = "form-control" })
                     </div>
-                </form>
+                    <div class="form-group col-12 Formulario-Nombres">
+                        <label for="LocalidadID" class="form-label text-light">Ciudad</label>
+                        @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-12 Formulario-Nombres">
+                        <label for="nombre" class="form-label text-light">Ingresar Nombre</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingresar Nombre">
+                    </div>
+                    <div class="form-group col-12 Formulario-Nombres">
+                        <label for="apellido" class="form-label text-light">Ingresar Apellido</label>
+                        <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido">
+                    </div>
+                    <div class="form-group col-12 Formulario-Nombres">
+                        <label for="edad" class="form-label text-light">Ingresar Edad</label>
+                        <input type="number" name="edad" id="edad" class="form-control" placeholder="Edad">
+                    </div>
+                    <div class="form-group col-12 Formulario-Nombres">
+                        <label for="telefono" class="form-label text-light">Ingresar Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Teléfono">
+                    </div>
+                    <div class="form-group col-12 Formulario-Nombres">
+                        <label for="documento" class="form-label text-light">Ingresar Documento</label>
+                        <input type="number" id="documento" name="documento" class="form-control"
+                            placeholder="Documento">
+                    </div>
+                    <div class="form-group col-12 Formulario-Nombres">
+                        <label for="correo" class="form-label text-light">Ingresar Correo</label>
+                        <input type="email" id="correo" name="correo" value="@correoUsuarioLogueado" class="form-control" readonly />
+                    </div>
+                    <div class="form-group col-12 Formulario-Nombres">
+                        <button type="submit" class="btn btn-secondary">Guardar</button>
+                    </div>
+                </div>
+            </form>
 
-                <!-- Div para mostrar el mensaje de éxito -->
-                <div id="mensajeExito" style="display:none;"></div>
-            </div>
+            <!-- Div para mostrar el mensaje de éxito -->
+            <div id="mensajeExito" style="display:none;"></div>
+        </div>
 
-            <div class="col-6">
-                <h1 class="titulo">Postulate.Com</h1>
-                <hr>
-                <h3 class="titulo-3">Regístrate de forma gratuita, ofrece tus servicios y recibe trabajos</h3>
-                <h6 class="titulo-6">Completa todos los campos para poder inscribirte</h6>
-            </div>
+        <!-- Contenido adicional, que será ocultado en pantallas pequeñas -->
+        <div class="col-6 ocultar-en-550px">
+            <h1 class="titulo">Postulate.Com</h1>
+            <hr>
+            <h3 class="titulo-3">Regístrate de forma gratuita, ofrece tus servicios y recibe trabajos</h3>
+            <h6 class="titulo-6">Completa todos los campos para poder inscribirte</h6>
         </div>
     </div>
+</div>
+
 </section>
 
 

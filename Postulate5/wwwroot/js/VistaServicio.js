@@ -34,12 +34,7 @@ function CardServicios() {
                                         <a href="javascript:cargarPerfil(${persona.servicioID})" class="text-decoration-none text-dark">
                                             <h5 class="">${persona.nombrePersona} ${persona.apellidoPersona}</h5>
                                             <p class=""><strong>Teléfono:</strong> ${persona.telefonoPersona}</p>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="herramienta-${persona.servicioID}" disabled ${persona.herramienta ? 'checked' : ''}>
-                                                <label class="form-check-label" for="herramienta-${persona.servicioID}">
-                                                    ¿Este usuario cuenta con herramientas?
-                                                </label>
-                                            </div>
+                                      
                                         </a>
                                         <div class="card-action mt-3">
                                             <button type="button" class="btn btn-danger me-2" onclick="EliminarServicio(${persona.servicioID})">

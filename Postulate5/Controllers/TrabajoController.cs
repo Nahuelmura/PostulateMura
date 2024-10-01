@@ -35,6 +35,25 @@ public class TrabajoController : Controller
         var personaIDLogueada = personaLogueada?.PersonaID;
         var nombrePersonaLogueada = personaLogueada?.Nombre;
 
+                if (personaLogueada == null)
+    {
+
+
+        
+        return Redirect("/Identity/Account/AccessDenied");
+    }
+
+
+         if (personaLogueada.Eliminado)
+    {
+        // con esto redirigimos a una vista que todavia no esta realizada 
+        ViewBag.Mensaje = "Tu cuenta está desactivada. No tienes acceso a los servicios.";
+        return Redirect("/Identity/Account/AccessDenied");
+    }
+
+    
+
+
 
 
         var profesiones = _context.Profesiones.ToList();
@@ -69,27 +88,36 @@ public class TrabajoController : Controller
 
         List<VistaProfesion> tiposProfesionMostrar = new List<VistaProfesion>();
 
-        // con este filtro obtenemos las profesiones de los servicios propuestos por el usuario logueado
-        var serviciosPropuestos = _context.Servicios
-            .Include(s => s.Profesion)
-            .Where(s => s.Persona.Email == correoUsuarioLogueado)
-            .Select(s => s.ProfesionID)
-            .Distinct()
-            .ToList();
+    // Filtrar profesiones de los servicios propuestos por el usuario logueado
+    var serviciosPropuestos = _context.Servicios
+        .Include(s => s.Profesion)
+        .Where(s => s.Persona.Email == correoUsuarioLogueado)
+        .Select(s => s.ProfesionID)
+        .Distinct()
+        .ToList();
 
-        // con este filtro obtenemos trabajos basados en las profesiones de los servicios propuestos
-        var trabajos = _context.Trabajos
-            .Include(t => t.Persona)
-            .Include(t => t.Profesion)
-            .Where(t => serviciosPropuestos.Contains(t.ProfesionID))
-            .ToList();
+    // con este filtro Obtenego trabajos basados en las profesiones de los servicios propuestos,
+    var trabajosRelacionadosServicios = _context.Trabajos
+        .Include(t => t.Persona)
+        .Include(t => t.Profesion)
+        .Where(t => serviciosPropuestos.Contains(t.ProfesionID))
+        .ToList();
 
-        // Aplicar filtro adicional por nombre de profesión si se especifica
-        if (!string.IsNullOrEmpty(NombreProfesion))
-        {
-            trabajos = trabajos.Where(s => s.Profesion.Nombre == NombreProfesion).ToList();
-        }
+    // con este filtro puedo mostrar  trabajos publicados directamente por el usuario logueado
+    var trabajosPublicadosPorUsuario = _context.Trabajos
+        .Include(t => t.Persona)
+        .Include(t => t.Profesion)
+        .Where(t => t.Persona.Email == correoUsuarioLogueado)
+        .ToList();
 
+   // con esto combinamos ambos trabajos tango como los publicados como los relacionados
+    var trabajos = trabajosRelacionadosServicios.Union(trabajosPublicadosPorUsuario).ToList();
+
+  
+    if (!string.IsNullOrEmpty(NombreProfesion))
+    {
+        trabajos = trabajos.Where(t => t.Profesion.Nombre == NombreProfesion).ToList();
+    }
         foreach (var trabajo in trabajos)
         {
             var tipoProfesionMostrar = tiposProfesionMostrar.SingleOrDefault(t => t.ProfesionID == trabajo.ProfesionID);
@@ -115,8 +143,8 @@ public class TrabajoController : Controller
                 Direccion = trabajo.Direccion,
                 Descripcion = trabajo.Descripcion,
                 Hora = trabajo.Hora,
-                Horastring = trabajo.Hora.ToString("dd/MM/yyyy HH:mm"),
-                Fechastring = trabajo.Fecha.ToString("dd/MM/yyyy HH:mm"),
+                Horastring = trabajo.Hora.ToString("HH:mm"),
+                Fechastring = trabajo.Fecha.ToString("dd/MM/yyyy"),
                 Comentario = trabajo.Comentario,
             };
 
@@ -128,6 +156,11 @@ public class TrabajoController : Controller
 
     public JsonResult AgregarTrabajo(int PersonaID, int TrabajoID, int ProfesionID, int? ImagenID, string direccion, string descripcion, DateTime hora, DateTime fecha, int valoracion, string comentario)
     {
+
+        direccion = direccion.ToUpper();
+        descripcion = descripcion.ToUpper();
+        comentario = comentario.ToUpper();
+
 
         var trabajoExistente = _context.Trabajos.FirstOrDefault(s => s.PersonaID == PersonaID && s.ProfesionID == ProfesionID);
 

@@ -49,12 +49,11 @@
             <input type="text" id="direccion" class="form-control form-control-lg" placeholder="Direccion">
         </div>
 
-        <div class="mb-3">
-            <label for="fecha" class="form-label">Fecha</label>
-            <input type="date" id="fecha" class="form-control form-control-lg"
-                   value="@DateTime.Now.ToString("yyyy-MM-dd")">
-        </div>
-
+     <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha</label>
+        <input type="date" id="fecha" name="fecha" class="form-control form-control-lg"
+               value="@DateTime.Now.ToString("yyyy-MM-dd")">
+    </div>
         <div class="mb-3">
             <label for="hora" class="form-label">Hora solicitada</label>
             <input type="datetime-local" id="hora" class="form-control"

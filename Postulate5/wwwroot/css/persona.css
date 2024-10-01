@@ -59,3 +59,22 @@
 .texto3{
     font-size: 1.7em;
 }
+
+
+
+/* Ocultar contenido adicional cuando la pantalla es de 550px o menos */
+@media (max-width: 550px) {
+    .ocultar-en-550px, .ocultar-en-550px ~ * {
+        display: none;
+    }
+    
+    /* Asegurar que el formulario ocupe todo el ancho disponible */
+    .Contenedor-formulario .row {
+        display: flex;
+        justify-content: center;
+    }
+
+    .col-12 {
+        max-width: 100%;
+    }
+}

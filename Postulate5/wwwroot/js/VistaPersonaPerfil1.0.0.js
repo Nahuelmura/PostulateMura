@@ -16,7 +16,7 @@ function RecuperarPerfilPersonaLogeada() {
                 contenidoPerfil += `
                     <div class="col-md-12">
                         <div class="card mb-4">
-                            <div class="card-header bg-secondary text-white">
+                            <div class="card-header bg-secondary text-white ">
                                 Datos personales
                             </div>
                             <div class="card-body">
@@ -29,10 +29,10 @@ function RecuperarPerfilPersonaLogeada() {
                                 <p class="texto3"><strong>Email:</strong> ${perfil.email}</p>
                                 <div class="button-group mt-3">
                                     <button type="button" class="btn btn-primary" onclick="EditarPefil(${perfil.personaID})">
-                                        Editar
+                                        Editar Cuenta
                                     </button>
-                                    <button type="button" class="btn btn-danger" onclick="EliminarLocalidad(${perfil.personaID})">
-                                        Eliminar
+                                    <button type="button" class="btn btn-danger" onclick="EliminarPersona(${perfil.personaID})">
+                                        Eliminar Cuenta
                                     </button>
                                 </div>
                             </div>
@@ -121,7 +121,62 @@ function GuardarPerfil() {
             alert('Ocurrió un error al guardar los datos.');
         }
     });
+
+
+    
 }
+function EliminarPersona(personaID) {
+    // Primero mostramos el SweetAlert para la confirmación
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "¡No podrás revertir esto!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, ¡eliminarlo!"
+    }).then((result) => {
+  
+        if (result.isConfirmed) {
+         
+            $.ajax({
+                url: '../../Persona/EliminarPersona', // La URL para la petición
+                data: { personaID: personaID },
+                type: 'POST',
+                dataType: 'json',
+                success: function (respuesta) {
+                    if (respuesta.success) {
+                       
+                        Swal.fire({
+                            title: "¡Eliminado!",
+                            text: "El registro ha sido eliminado exitosamente.",
+                            icon: "success"
+                        }).then(() => {
+                       
+                            window.location.href = '../Identity/Account/Login'; // Cambia la ruta según tu configuración
+                        });
+                    } else {
+                     
+                        Swal.fire({
+                            title: "Error",
+                            text: "Hubo un problema al eliminar el registro.",
+                            icon: "error"
+                        });
+                    }
+                },
+                error: function (xhr, status) {
+                    // Mostramos el error si ocurre un problema con la petición AJAX
+                    Swal.fire({
+                        title: "Error",
+                        text: "Disculpa, hubo un problema al intentar eliminar el registro.",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+    });
+}
+
 
 
 

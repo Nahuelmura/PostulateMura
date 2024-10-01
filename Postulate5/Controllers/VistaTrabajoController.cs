@@ -27,6 +27,7 @@ public class VistaTrabajoController : Controller
 
         ViewBag.ProfesionID = new SelectList(profesiones.OrderBy(c => c.Nombre), "ProfesionID", "Nombre");
         ViewBag.ProfesionBuscarID = new SelectList(profesiones.OrderBy(c => c.Nombre), "ProfesionID", "Nombre");
+
         var personas = _context.Personas.ToList();
         personas.Add(new Persona { PersonaID = 0, Nombre = "[SELECCIONE...]" });
 
@@ -39,70 +40,52 @@ public class VistaTrabajoController : Controller
 
 
 
-    public JsonResult CardTrabajos( int id, string NombreProfesion)
+public JsonResult CardTrabajos(int? ProfesionID)
+{
+    
+    List<VistaProfesion> tiposProfesionMostrar = new List<VistaProfesion>();
+
+    var trabajos = _context.Trabajos.Include(t => t.Persona).Include(t => t.Profesion).ToList();
+
+
+    if (ProfesionID.HasValue && ProfesionID.Value > 0)
     {
-
-         
-
-
-        List<VistaProfesion> tiposProfesionMostrar = new List<VistaProfesion>();
-
-        var trabajos = _context.Trabajos.Include(t => t.Persona).Include(t => t.Profesion).ToList();
-
-        // llamada completar 
-
-        if (NombreProfesion != null)
-        {
-            trabajos = trabajos.Where(s => s.Profesion.Nombre == NombreProfesion).ToList();
-        }
-
-
-
-
-
-        foreach (var trabajo in trabajos)
-        {
-            var tipoProfesionMostrar = tiposProfesionMostrar.SingleOrDefault(t => t.ProfesionID == trabajo.ProfesionID);
-            if (tipoProfesionMostrar == null)
-            {
-                tipoProfesionMostrar = new VistaProfesion
-                {
-                    ProfesionID = trabajo.ProfesionID,
-                    Nombre = trabajo.Profesion.Nombre,
-                    ListadoPersonas = new List<VistaTrabajoPersonas>(),
-
-
-
-                };
-                tiposProfesionMostrar.Add(tipoProfesionMostrar);
-            }
-
-            var VistaTrabajoPersonas = new VistaTrabajoPersonas
-            {
-
-
-                NombrePersona = trabajo.Persona.Nombre,
-                ApellidoPersona = trabajo.Persona.Apellido,
-                TelefonoPersona = trabajo.Persona.Telefono,
-                TrabajoID = trabajo.TrabajoID,
-                ImagenID = trabajo.ImagenID,
-                PersonaID = trabajo.PersonaID,
-                Direccion = trabajo.Direccion,
-                Descripcion = trabajo.Descripcion,
-                Hora = trabajo.Hora,
-                Fecha = trabajo.Fecha,
-                Comentario = trabajo.Comentario,
-
-            };
-
-            tipoProfesionMostrar.ListadoPersonas.Add(VistaTrabajoPersonas);
-        }
-
-
-        return Json(tiposProfesionMostrar);
-
-
+        trabajos = trabajos.Where(s => s.ProfesionID == ProfesionID.Value).ToList();
     }
+
+
+    foreach (var trabajo in trabajos)
+    {
+        var tipoProfesionMostrar = tiposProfesionMostrar.SingleOrDefault(t => t.ProfesionID == trabajo.ProfesionID);
+        if (tipoProfesionMostrar == null)
+        {
+            tipoProfesionMostrar = new VistaProfesion
+            {
+                ProfesionID = trabajo.ProfesionID,
+                Nombre = trabajo.Profesion.Nombre,
+                ListadoPersonas = new List<VistaTrabajoPersonas>(),
+            };
+            tiposProfesionMostrar.Add(tipoProfesionMostrar);
+        }
+
+        var vistaTrabajoPersonas = new VistaTrabajoPersonas
+        {
+            NombrePersona = trabajo.Persona.Nombre,
+            ApellidoPersona = trabajo.Persona.Apellido,
+            TelefonoPersona = trabajo.Persona.Telefono,
+            TrabajoID = trabajo.TrabajoID,
+            Direccion = trabajo.Direccion,
+            Descripcion = trabajo.Descripcion,
+            Hora = trabajo.Hora,
+            Fecha = trabajo.Fecha,
+            Comentario = trabajo.Comentario,
+        };
+
+        tipoProfesionMostrar.ListadoPersonas.Add(vistaTrabajoPersonas);
+    }
+
+    return Json(tiposProfesionMostrar);
+}
 
 
 

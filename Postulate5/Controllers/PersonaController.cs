@@ -37,7 +37,7 @@ public class PersonaController : Controller
   
     if (persona != null)
     {
-        return RedirectToAction("VistaPersonaPerfil"); 
+        return RedirectToAction("Index", "Home"); 
     }
 
    
@@ -74,10 +74,12 @@ public class PersonaController : Controller
 
     // en guardar se guardar los datos del formulario de ingreso de la persona 
     [HttpPost]
-    public ActionResult Guardar(int localidadId, int? personaID, string nombre, string apellido, int edad, int telefono, int documento, string? correo)
+  public ActionResult Guardar(int localidadId, int? personaID, string nombre, string apellido, int edad, int telefono, int documento, string? correo)
     {
 
-      
+      nombre = nombre.ToUpper();
+      apellido = apellido.ToUpper();
+
         string resultado = "Error al guardar el formulario";
 
         // declaro variables para  obtener el correo del usuario logueado 
@@ -373,6 +375,31 @@ public class PersonaController : Controller
 
         return Json(resultado);
     }
+
+
+
+// Eliminar persona, solamente la persona logeada
+
+
+      [HttpPost]
+public JsonResult EliminarPersona(int personaID)
+{
+    var persona = _context.Personas.Find(personaID);
+
+    if (persona != null)
+    {
+        _context.Personas.Remove(persona);
+        _context.SaveChanges();
+        
+        // Devolver un resultado exitoso
+        return Json(new { success = true });
+    }
+    
+    // Devolver un resultado fallido si no se encuentra la persona
+    return Json(new { success = false });
+}
+
+
 
 
 

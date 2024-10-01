@@ -41,7 +41,7 @@ namespace Postulate.Controllers
 
 
         
-        return RedirectToAction("Error", "Home"); 
+        return Redirect("/Identity/Account/AccessDenied");
     }
 
     // Si la persona está desactivada (Eliminado == true)
@@ -49,7 +49,7 @@ namespace Postulate.Controllers
     {
         // con esto redirigimos a una vista que todavia no esta realizada 
         ViewBag.Mensaje = "Tu cuenta está desactivada. No tienes acceso a los servicios.";
-        return View("CuentaDesactivada");
+        return Redirect("/Identity/Account/AccessDenied");
     }
 
             var profesiones = _context.Profesiones.ToList();
@@ -126,6 +126,13 @@ namespace Postulate.Controllers
 
         public JsonResult AgregarServicio(int ServicioID, int PersonaID, int ProfesionID, bool herramienta, string? descripcion, string? titulo, string? Institucion)
         {
+
+            descripcion = descripcion.ToUpper();
+            titulo = titulo.ToUpper();
+            Institucion =Institucion.ToUpper();
+            
+
+
             var servicioExistente = _context.Servicios.FirstOrDefault(s => s.PersonaID == PersonaID && s.ProfesionID == ProfesionID);
 
             if (servicioExistente != null)

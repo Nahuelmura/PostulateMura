@@ -15,6 +15,8 @@ namespace Postulate.Models
 
       
          public int ServicioID { get; set; }
+
+         public DateTime FechaMatch { get; set; }
    
 
           public bool Respuesta { get; set; }

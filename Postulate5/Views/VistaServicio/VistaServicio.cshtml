@@ -1,5 +1,7 @@
 <head>
     <script src="~/js/VistaServicio.js"></script>
+     @using Microsoft.AspNetCore.Identity
+    @inject SignInManager<IdentityUser> SignInManager
 </head>
 
 <body>
@@ -19,6 +21,8 @@
 </div>
     <div class="conte">
         <div class="contenedor-card card id=" ServicioID">
+
+            
 
             <div id="contenedorCards" class="row"></div>
         </div>

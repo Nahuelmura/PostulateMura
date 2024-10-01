@@ -8,11 +8,7 @@
 <script src="~/js/VistaPersonaPerfil1.0.0.js"></script>
 <script src="~/js/Persona.1.0.0.js"></script>
 
-<section class="container text-center my-5">
-    @* <h1 class="titulo-home">Postulate.com</h1> *@
-    <h1 class="titulo-home display-4">Bienvenido, @ViewBag.NombrePersona!</h1>
-  
-</section>
+
 
 <!-- Modal -->
 <div class="modal fade" id="ModalVistaPersona" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -30,19 +26,24 @@
                         @Html.DropDownList("LocalidadID", null, htmlAttributes: new { @class = "form-control" })
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="nombre" id="nombre" aria-label="Nombre" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" placeholder="nombre" id="nombre" aria-label="Nombre"
+                            aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="apellido" id="apellido" aria-label="Apellido" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" placeholder="apellido" id="apellido"
+                            aria-label="Apellido" aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="edad" id="edad" aria-label="Edad" aria-describedby="basic-addon2">
+                        <input type="number" class="form-control" placeholder="edad" id="edad" aria-label="Edad"
+                            aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="telefono" id="telefono" aria-label="Teléfono" aria-describedby="basic-addon2">
+                        <input type="number" class="form-control" placeholder="telefono" id="telefono"
+                            aria-label="Teléfono" aria-describedby="basic-addon2">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="documento" id="documento" aria-label="Documento" aria-describedby="basic-addon2">
+                        <input type="number" class="form-control" placeholder="documento" id="documento"
+                            aria-label="Documento" aria-describedby="basic-addon2">
                     </div>
                 </form>
             </div>
@@ -54,44 +55,96 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container_segundo">
     <div class="row">
         <!-- Contenedor para datos de la persona -->
         <div id="perfilRazorContainer" class="col-md-4">
-           
+
             <!-- Aquí puedes incluir otros elementos o datos relacionados con el perfil -->
             <div id="perfilContainer" class="col-md-12">
                 <!-- Aquí se llenará el contenido dinámico mediante JavaScript -->
             </div>
         </div>
 
-        <!-- Contenedor card -->
         <div class="col-md-7">
             <div class="row">
-                <div class="col-md-12 mb-3">
-                    <div class="card position-relative tamaño-card">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="card-img-top Alto_imagen" alt="Wild Landscape" style="filter: blur(5px);" />
-                        <div class="card-body position-absolute card_diseño text-white">
-                            <h5 class="card-title">Card title 1</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 mb-3">
-                    <div class="card position-relative">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="card-img-top" alt="Wild Landscape" style="filter: blur(5px);" />
-                        <div class="card-body position-absolute  card_diseño text-white">
-                            <h5 class="card-title">Card title 2</h5>
-                        </div>
-                    </div>
-                </div>
-              
 
-                     <p class="posicion_Link_perfil">
-                <a class="Link_perfil" id="forgot-password"
-                    href="@Url.Page("/Account/ForgotPassword", new { area = "Identity" })">¿Quiere cambiar la contraseña?</a>
-            </p>
-                </div>
             </div>
+            <section class="container text-center my-5">
+                @* <h1 class="titulo-home">Postulate.com</h1> *@
+                <h1 class="titulo-home display-4">Bienvenido, @ViewBag.NombrePersona!</h1>
+
+            </section>
+
+            <p class="sub">¿Buscas empleo o necesitas contratar servicios?</p>
+
+            <p class="sub">
+                Postúlate con nosotros y conecta con las mejores oportunidades y
+                profesionales en tu área. ¡Empieza hoy mismo!</p>
+
+
+            <div class="row">
+                <a href="http://localhost:5104/Servicios">
+            <div class=" col-lg-6 mb-5 cartas_card">
+                <div class="card-container card-hoover tamanio-card" id="card-1">
+                    <div class="card">
+                        <h5 class="card-title text-center">Publica Tus servicios</h5>
+                        <a href="javascript:cargarPerfil(1)" class="text-decoration-none text-dark">
+                            <h5 class="texto-card">Nombre Apellido</h5>
+                            <p class="texto-card"><strong>Teléfono:</strong> xxxxxxxx</p>
+                        </a>
+                        <div class="card-action mt-3">
+                        </div>
+                    </div>
+                </div>
+                </a>
+            </div>
+
+                
+                   <div class=" col-lg-6 mb-5 cartas_card"> 
+                      <a href="http://localhost:5104/Trabajo">
+                <div class=" card-container card-hoover tamanio-card" id="card-1">
+                    <div class="card">
+                        <h5 class="card-title text-center">Publica Tus Trabajos </h5>
+                        <a href="javascript:cargarPerfil(1)" class="text-decoration-none text-dark">
+                            <h5 class="texto-card">Nombre Apellido</h5>
+                            <p class="texto-card"<strong>Teléfono:</strong> xxxxxxxx</p>
+                        </a>
+                        <div class="card-action mt-3">
+                        </div>
+                    </div>
+                </div>
+                </a>
+                
+            </div>
+                    <p class="posicion_Link_perfil">
+            <a class="Link_perfil" id="forgot-password"
+                href="@Url.Page("/Account/ForgotPassword", new { area = "Identity" })">¿Quiere cambiar la
+                contraseña?</a>
+        </p>
         </div>
+
+        </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+        
+
+
+
+
+
+
     </div>
+</div>
+</div>
+</div>
 </div>

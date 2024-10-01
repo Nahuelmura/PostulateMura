@@ -1,8 +1,10 @@
 function CardTrabajos() {
+    let profesionID = $("#profesionBuscarID").val(); 
+
     $.ajax({
         url: '/VistaTrabajo/CardTrabajos',
-        data: {},
-        type: 'POST',
+        data: { ProfesionID: profesionID },  
+        type: 'POST', 
         dataType: 'json',
         success: function (tiposProfesionMostrar) {
             console.log(tiposProfesionMostrar);
@@ -35,9 +37,6 @@ function CardTrabajos() {
                                                     <p><strong>Comentario:</strong> ${persona.comentario}</p>
                                                 </div>
                                                 <div class="card-action mt-3">
-                                                    <button type="button" class="btn btn-success me-2" onclick="EditarTrabajo(${persona.trabajoID})">
-                                                        <i class="fa-regular fa-pen-to-square"></i> Editar
-                                                    </button>
                                                     <button type="button" class="btn btn-danger me-2" onclick="EliminarTrabajo(${persona.trabajoID})">
                                                         <i class="fa-regular fa-trash-can"></i> Eliminar
                                                     </button>
@@ -47,7 +46,6 @@ function CardTrabajos() {
                                     </div>
                                 </div>`;
                         });
-                        
 
                 contenidoCard += `</div></div>`;
             });

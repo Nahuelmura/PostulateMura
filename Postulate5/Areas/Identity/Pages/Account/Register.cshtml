@@ -5,18 +5,25 @@
 }
 
 <style>
-    body{
-    background: url('/img/1567677.jpg') no-repeat;
+body {
+    background: url('/img/Obrero1.jpg') no-repeat;
     background-size: cover;
+    height: 100vh;
+    transition: background 1s ease-in-out; /* Suaviza la transición entre imágenes */
+}
 }
 </style>
 
 <h1>@ViewData["Title"]</h1>
 <section id="register">
 
+    
+
     <div class="register-box">
+        
         <form id="" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2 class="h2r">Crear cuenta</h2>
+            <h2 class="h2l">Postulate.Com</h2>
+                <h3 class="h3l">Crear cuenta</h3>
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="input-register">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" required/>
@@ -41,4 +48,23 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+      <script>
+    const images = [
+        '/img/Obrero1.jpg',
+        '/img/obrero2.jpg',
+        '/img/obrero3.jpeg',
+        '/img/obrero4.jpg',
+        '/img/obrero5.jpeg',
+    ];
+
+    let currentIndex = 0;
+
+    function changeBackground() {
+        currentIndex = (currentIndex + 1) % images.length; // Cambia al siguiente índice
+        document.body.style.backgroundImage = `url('${images[currentIndex]}')`;
+    }
+
+    setInterval(changeBackground, 5000); // Cambia la imagen cada 5 segundos
+</script>
 }
