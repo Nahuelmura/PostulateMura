@@ -87,9 +87,76 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+<!-- Modal para mostrar servicios -->
+<div class="modal fade" id="serviciosModal" tabindex="-1" role="dialog" aria-labelledby="serviciosModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="serviciosModalLabel">Personas con servicios Servicios relacionados con Este trabajo</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              
+              <th>Nombre Persona</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-Contratos">
+            
+
+            
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+   <button type="button" onclick="LimpiarModal();" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+           
+            <th>Fecha de Solicitud</th>
+            <th>Estado</th>
+            <th>Responder</th>
+        </tr>
+    </thead>
+    <tbody id="solicitudesPendientesBody">
+        <!-- Aquí se llenarán las filas con las solicitudes traídas -->
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    
+
     @section Scripts {
         <script src="~/js/Trabajo.1.0.0.js"></script>
     }
 </body>
 
 </html>
+ 

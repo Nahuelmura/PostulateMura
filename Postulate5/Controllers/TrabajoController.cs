@@ -157,9 +157,9 @@ public class TrabajoController : Controller
     public JsonResult AgregarTrabajo(int PersonaID, int TrabajoID, int ProfesionID, int? ImagenID, string direccion, string descripcion, DateTime hora, DateTime fecha, int valoracion, string comentario)
     {
 
-        direccion = direccion.ToUpper();
-        descripcion = descripcion.ToUpper();
-        comentario = comentario.ToUpper();
+        // direccion = direccion.ToUpper();
+        // descripcion = descripcion.ToUpper();
+        // comentario = comentario.ToUpper();
 
 
         var trabajoExistente = _context.Trabajos.FirstOrDefault(s => s.PersonaID == PersonaID && s.ProfesionID == ProfesionID);
