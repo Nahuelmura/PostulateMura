@@ -44,9 +44,9 @@ html{
 
 .Contenedor-formulario {
 
-  background: #1316c8;
-  background: -webkit-linear-gradient(0deg, #1316c8 0%, #210a2e 100%);
-  background: linear-gradient(0deg, #1316c8 0%, #210a2e 100%);
+  background: #0590e3;
+  background: -webkit-linear-gradient(0deg, #0590e3 0%, #210a2e 100%);
+  background: linear-gradient(0deg, #0590e3 0%, #210a2e 100%);
   color: #fff;
   padding: 20px 20px 20px;
   border-radius: 10px;

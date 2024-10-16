@@ -6,6 +6,15 @@
 
 <body>
 
+    <div class="toast align-items-center text-bg-primary border-0" id="myToast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000" style="position: fixed; top: 300px; right: 20px; z-index: 1050;">
+    <div class="d-flex">
+        <div class="toast-body">
+           Busca El Servicio especifica con el filtro !
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+
 <h1 class="tit"> Todos los Servicios <i class="fa-solid fa-toolbox"></i></h1>
 <p class="parrafo_servicio"><i class="fa-solid fa-exclamation"></i> En esta seccion se encuentan Todos los servicios los usuarios Logeados</p>
 
@@ -76,6 +85,14 @@
 </body>
 
 </html>
+
+   <script>
+      // Mostrar el toast cuando se cargue la página
+      document.addEventListener('DOMContentLoaded', function () {
+          var myToast = new bootstrap.Toast(document.getElementById('myToast'));
+          myToast.show();
+      });
+   </script>
 @section Scripts {
     <script src="~/js/VistaServicio.js"></script>
 }

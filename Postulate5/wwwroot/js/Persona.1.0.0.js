@@ -66,6 +66,8 @@ function enviarFormularioAjax() {
             $("#formulario").fadeOut("slow", function() {
                 $("#mensajeExito").html('<div class="alert  Felicitaciones" role="alert">Felicidades, usted es un nuevo usuario de Postulate.Com</div>');
                 $("#mensajeExito").fadeIn("slow");
+              
+           
             });
         },
         error: function(xhr, status) {

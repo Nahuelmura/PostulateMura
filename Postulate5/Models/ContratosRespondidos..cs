@@ -24,18 +24,30 @@ namespace Postulate.Models
 
 
         public bool Respuesta { get; set; }
+
+        public Estado RespuestaDesolicitud { get; set; }
         public Servicio Servicio { get; set; }
 
         public Trabajo Trabajo { get; set; }
 
-         public Persona Persona { get; set; }
+        public Persona Persona { get; set; }
+
+    }
+
+    public enum Estado
+    {
+        Pendiente = 1,
+        Aceptado,
+        Rechazado,
+
 
     }
 
 
+
     public class ContratoRespondidoVista
     {
-
+        public int ContratoRespondidoID { get; set; }
         public int TrabajoID { get; set; }
 
         public int ServicioID { get; set; }
@@ -50,11 +62,27 @@ namespace Postulate.Models
         public string? NombrePersona { get; set; }
 
         public string? ApellidoPersona { get; set; }
-          public string? DescripcionTrabajo { get; set; }
+        public string? DescripcionTrabajo { get; set; }
 
-           public string? ComentarioTrabajo { get; set; }
+        public string? ComentarioTrabajo { get; set; }
 
-          
+
+         public string? DireccionTrabajo { get; set; }
+
+            public  string? HoraSolicitadaTrabajo { get; set; }
+
+               public  string? FechaSolicitadaTrabajo { get; set; }
+
+
+
+
+
+
+
+
+        public Estado RespuestaDesolicitud { get; set; }
+        public string? RespuestaDesolicitudString { get; set; }
+
 
         public DateTime FechaMatch { get; set; }
 
@@ -62,6 +90,7 @@ namespace Postulate.Models
 
 
         public bool Respuesta { get; set; }
+
 
 
     }

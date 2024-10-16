@@ -75,7 +75,7 @@ function EditarPefil(personaID) {
             document.getElementById("LocalidadID").value = Persona.nombreLocalidad;
 
             $("#ModalVistaPersona").modal("show");
-            RecuperarPerfilPersona();
+            RecuperarPerfilPersonaLogeada();
 
         },
         error: function (xhr, status) {
@@ -109,10 +109,10 @@ function GuardarPerfil() {
         },
         success: function (response) {
             alert(response);
-            // Puedes agregar lógica adicional para actualizar la tabla o cerrar el modal
+          
     
             $("#ModalVistaPersona").modal("hide");
-            RecuperarPerfilPersona();
+            RecuperarPerfilPersonaLogeada();
 
             
         },
@@ -126,7 +126,7 @@ function GuardarPerfil() {
     
 }
 function EliminarPersona(personaID) {
-    // Primero mostramos el SweetAlert para la confirmación
+ 
     Swal.fire({
         title: "¿Estás seguro?",
         text: "¡No podrás revertir esto!",
@@ -140,7 +140,7 @@ function EliminarPersona(personaID) {
         if (result.isConfirmed) {
          
             $.ajax({
-                url: '../../Persona/EliminarPersona', // La URL para la petición
+                url: '../../Persona/EliminarPersona', 
                 data: { personaID: personaID },
                 type: 'POST',
                 dataType: 'json',
@@ -165,7 +165,7 @@ function EliminarPersona(personaID) {
                     }
                 },
                 error: function (xhr, status) {
-                    // Mostramos el error si ocurre un problema con la petición AJAX
+              
                     Swal.fire({
                         title: "Error",
                         text: "Disculpa, hubo un problema al intentar eliminar el registro.",

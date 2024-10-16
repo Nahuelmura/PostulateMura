@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -24,7 +25,7 @@ public class PersonaController : Controller
     }
 
 
-
+ [Authorize]
  public IActionResult Index()
 {
     // Obtener el correo del usuario logueado
@@ -73,7 +74,7 @@ public class PersonaController : Controller
 
 
     // en guardar se guardar los datos del formulario de ingreso de la persona 
-    [HttpPost]
+
   public ActionResult Guardar(int localidadId, int? personaID, string nombre, string apellido, int edad, int telefono, int documento, string? correo)
     {
 
@@ -140,6 +141,7 @@ public class PersonaController : Controller
 
     // en esta vista se recupera los datos para crear el listado y luego poder editarlos
 
+ [Authorize]
     public IActionResult VistaPersona()
     {
         

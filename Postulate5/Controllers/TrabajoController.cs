@@ -81,78 +81,62 @@ public class TrabajoController : Controller
 
 
 
-    public async Task<JsonResult> CardTrabajos(int id, string NombreProfesion)
-    {
-        var usuarioLogueado = await _userManager.GetUserAsync(HttpContext.User);
-        var correoUsuarioLogueado = usuarioLogueado?.Email;
+public async Task<JsonResult> CardTrabajos(int id, string NombreProfesion)
+{
+    var usuarioLogueado = await _userManager.GetUserAsync(HttpContext.User);
+    var correoUsuarioLogueado = usuarioLogueado?.Email;
 
-        List<VistaProfesion> tiposProfesionMostrar = new List<VistaProfesion>();
+    List<VistaProfesion> tiposProfesionMostrar = new List<VistaProfesion>();
 
-    // Filtrar profesiones de los servicios propuestos por el usuario logueado
-    var serviciosPropuestos = _context.Servicios
-        .Include(s => s.Profesion)
-        .Where(s => s.Persona.Email == correoUsuarioLogueado)
-        .Select(s => s.ProfesionID)
-        .Distinct()
-        .ToList();
-
-    // con este filtro Obtenego trabajos basados en las profesiones de los servicios propuestos,
-    var trabajosRelacionadosServicios = _context.Trabajos
-        .Include(t => t.Persona)
-        .Include(t => t.Profesion)
-        .Where(t => serviciosPropuestos.Contains(t.ProfesionID))
-        .ToList();
-
-    // con este filtro puedo mostrar  trabajos publicados directamente por el usuario logueado
+    // Solo obtengo trabajos publicados directamente por el usuario logueado
     var trabajosPublicadosPorUsuario = _context.Trabajos
         .Include(t => t.Persona)
         .Include(t => t.Profesion)
         .Where(t => t.Persona.Email == correoUsuarioLogueado)
         .ToList();
 
-   // con esto combinamos ambos trabajos tango como los publicados como los relacionados
-    var trabajos = trabajosRelacionadosServicios.Union(trabajosPublicadosPorUsuario).ToList();
+    var trabajos = trabajosPublicadosPorUsuario;
 
-  
     if (!string.IsNullOrEmpty(NombreProfesion))
     {
         trabajos = trabajos.Where(t => t.Profesion.Nombre == NombreProfesion).ToList();
     }
-        foreach (var trabajo in trabajos)
+
+    foreach (var trabajo in trabajos)
+    {
+        var tipoProfesionMostrar = tiposProfesionMostrar.SingleOrDefault(t => t.ProfesionID == trabajo.ProfesionID);
+        if (tipoProfesionMostrar == null)
         {
-            var tipoProfesionMostrar = tiposProfesionMostrar.SingleOrDefault(t => t.ProfesionID == trabajo.ProfesionID);
-            if (tipoProfesionMostrar == null)
+            tipoProfesionMostrar = new VistaProfesion
             {
-                tipoProfesionMostrar = new VistaProfesion
-                {
-                    ProfesionID = trabajo.ProfesionID,
-                    Nombre = trabajo.Profesion.Nombre,
-                    ListadoPersonas = new List<VistaTrabajoPersonas>(),
-                };
-                tiposProfesionMostrar.Add(tipoProfesionMostrar);
-            }
-
-            var VistaTrabajoPersonas = new VistaTrabajoPersonas
-            {
-                NombrePersona = trabajo.Persona.Nombre,
-                ApellidoPersona = trabajo.Persona.Apellido,
-                TelefonoPersona = trabajo.Persona.Telefono,
-                TrabajoID = trabajo.TrabajoID,
-                ImagenID = trabajo.ImagenID,
-                PersonaID = trabajo.PersonaID,
-                Direccion = trabajo.Direccion,
-                Descripcion = trabajo.Descripcion,
-                Hora = trabajo.Hora,
-                Horastring = trabajo.Hora.ToString("HH:mm"),
-                Fechastring = trabajo.Fecha.ToString("dd/MM/yyyy"),
-                Comentario = trabajo.Comentario,
+                ProfesionID = trabajo.ProfesionID,
+                Nombre = trabajo.Profesion.Nombre,
+                ListadoPersonas = new List<VistaTrabajoPersonas>(),
             };
-
-            tipoProfesionMostrar.ListadoPersonas.Add(VistaTrabajoPersonas);
+            tiposProfesionMostrar.Add(tipoProfesionMostrar);
         }
 
-        return Json(tiposProfesionMostrar);
+        var VistaTrabajoPersonas = new VistaTrabajoPersonas
+        {
+            NombrePersona = trabajo.Persona.Nombre,
+            ApellidoPersona = trabajo.Persona.Apellido,
+            TelefonoPersona = trabajo.Persona.Telefono,
+            TrabajoID = trabajo.TrabajoID,
+            ImagenID = trabajo.ImagenID,
+            PersonaID = trabajo.PersonaID,
+            Direccion = trabajo.Direccion,
+            Descripcion = trabajo.Descripcion,
+            Hora = trabajo.Hora,
+            Horastring = trabajo.Hora.ToString("HH:mm"),
+            Fechastring = trabajo.Fecha.ToString("dd/MM/yyyy"),
+            Comentario = trabajo.Comentario,
+        };
+
+        tipoProfesionMostrar.ListadoPersonas.Add(VistaTrabajoPersonas);
     }
+
+    return Json(tiposProfesionMostrar);
+}
 
     public JsonResult AgregarTrabajo(int PersonaID, int TrabajoID, int ProfesionID, int? ImagenID, string direccion, string descripcion, DateTime hora, DateTime fecha, int valoracion, string comentario)
     {

@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="~/js/CardServicio1.0.0.js"></script>
   <script src="~/js/Servicio.1.0.0.js"></script>
   <link rel="stylesheet" href="~/css/Servicio.css" asp-append-version="true" />
@@ -9,15 +10,12 @@
 
 <body>
 
-  
-<h1 class="tit">Mis Servicios <i class="fa-solid fa-toolbox"></i></h1>
-  <p class="parrafo_servicio"><i class="fa-solid fa-exclamation"></i> En esta seccion se encuentan los servicios que usted como usuario brinda</p>
-
+  <h1 class="tit">Mis Servicios <i class="fa-solid fa-toolbox"></i></h1>
+  <p class="parrafo_servicio"><i class="fa-solid fa-exclamation"></i> En esta sección se encuentran los servicios que usted como usuario brinda.</p>
 
   <!-- Botón para agregar servicio -->
   <div class="boton-container">
-    <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#agregarServicio">Agregar
-      Servicio</button>
+    <button type="button" class="btn btn-primary boton" data-bs-toggle="modal" data-bs-target="#agregarServicio">Agregar Servicio</button>
   </div>
 
   <div class="conte">
@@ -33,20 +31,26 @@
             <h1 class="modal-title" id="exampleModalLabel">Nuevo Servicio</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+
+          <!-- Toast dentro del modal -->
+          <div class="toast align-items-center text-bg-primary border-0" id="myToastModal" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000" style="position: relative; z-index: 1050;">
+            <div class="d-flex">
+              <div class="toast-body">
+                Atención: Mientras más datos ingreses, mejor para tu perfil de servicios.
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+
           <div class="modal-body">
             <form action="javascript:void(0)" method="post" class="row g-3">
               <input type="hidden" id="ServicioID" value="0" />
 
-              <div class="col-md-6">
-                <label for="ProfesionID" class="form-label">Profesion</label>
-                @Html.DropDownList("ProfesionID", null, htmlAttributes: new
-                  {
-                    @class = "form-control",
-                    id =
-                       "ProfesionID"
-                  })
-              </div>
-
+          <div class="col-md-6">
+  <label for="ProfesionID" class="form-label">Profesion</label>
+  @Html.DropDownList("ProfesionID", null, htmlAttributes: new { @class = "form-control", id = "ProfesionID" })
+  <small class="form-text text-muted " style="color: red;">Elige tu profesión en la que te desenvuelves.</small>
+</div>
 
               <!-- Campo oculto para el PersonaID -->
               <input type="hidden" id="PersonaID" value="@ViewBag.PersonaIDLogueada" />
@@ -54,17 +58,7 @@
               <!-- Mostrar el nombre de la persona logueada -->
               <div class="col-md-6">
                 <label for="NombrePersona" class="form-label">Nombre</label>
-                <input type="text" id="NombrePersona" class="form-control" value="@ViewBag.NombrePersonaLogueada"
-                  readonly />
-              </div>
-
-
-
-              <div class="col-md-6">
-                <div class="form-check">
-                  <input type="checkbox" id="herramienta" class="form-check-input">
-                  <label for="herramienta" class="form-check-label">Herramientas</label>
-                </div>
+                <input type="text" id="NombrePersona" class="form-control" value="@ViewBag.NombrePersonaLogueada" readonly />
               </div>
 
               <div class="col-md-6">
@@ -83,17 +77,67 @@
               </div>
             </form>
           </div>
+
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="LimpiarModal()"
-              data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-secondary" onclick="LimpiarModal()" data-bs-dismiss="modal">Cancelar</button>
             <button type="button" class="btn btn-primary" onclick="agregarServicio()">Guardar cambios</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Toast fuera del modal -->
+  <div class="toast align-items-center text-bg-success border-0" id="myToastOutside" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000" style="position: fixed; top: 265px; right: 20px; z-index: 1050;">
+    <div class="d-flex">
+      <div class="toast-body">
+       Agrega tu servicio, cliquea en Agregar servicio!
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+
+  <div>
+    <h1>Mis Servicios Solicitados</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Fecha de Solicitud</th>
+          <th>Nombre del Solicitante</th>
+          <th class="ocultar-en-550px">Comentario</th>
+          <th class="ocultar-en-550px">Descripción del Trabajo</th>
+        </tr>
+      </thead>
+      <tbody id="solicitudesPendientesBody">
+        <!-- Aquí se pueden agregar las filas dinámicamente -->
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+  <script>
+    window.onload = function () {
+      // Retraso en milisegundos para mostrar los toast
+      var delayModal = 2000;
+      var delayOutside = 400;
+
+      // Mostrar toast dentro del modal después de un retraso
+      setTimeout(function () {
+        var myToastModal = new bootstrap.Toast(document.getElementById('myToastModal'));
+        myToastModal.show();
+      }, delayModal);
+
+      // Mostrar toast fuera del modal después de un retraso
+      setTimeout(function () {
+        var myToastOutside = new bootstrap.Toast(document.getElementById('myToastOutside'));
+        myToastOutside.show();
+      }, delayOutside);
+    };
+  </script>
+
 </body>
 
 </html>
-
-                  

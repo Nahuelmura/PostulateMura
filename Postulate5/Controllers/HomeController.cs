@@ -25,6 +25,9 @@ namespace Postulate.Controllers
             _rolManager = rolManager;
         }
 
+         [Authorize]
+
+
         public async Task<IActionResult> Index()
         {
 

@@ -127,28 +127,52 @@
 
 
 
-
-
-
+@* tabla de solicitudes *@
+@* 
+<div>
+    <h1>Servicios solicitados</h1>
 <table class="table table-striped">
     <thead>
         <tr>
-           
-            <th>Fecha de Solicitud</th>
-            <th>Estado</th>
-            <th>Responder</th>
+            <th >Fecha de Solicitud</th>
+            <th>Nombre del solicitante</th>
+              <th class="ocultar-en-550px">Comentario</th>
+               <th class="ocultar-en-550px" >Descrpcion del trabajo </th>
         </tr>
     </thead>
     <tbody id="solicitudesPendientesBody">
-        <!-- Aquí se llenarán las filas con las solicitudes traídas -->
+
+</div>
+ *@
+
+
+
+<div>
+         <h1>Trabajos Postulados </h1>
+       
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Comentario del Trabajo</th>
+                    <th>Descripción del Trabajo</th>
+                
+                    <th>Nombre del Persona que ofrece el Servicio</th>
+                    <th>Respuesta</th>
+                    <th>Fecha de Postulación</th>
+                </tr>
+            </thead>
+            <tbody id="tablaTrabajosPostulados">
+                <!-- Los datos se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+
+       
+
     </tbody>
 </table>
 
-
-
-
-
-
+</div>
 
 
     

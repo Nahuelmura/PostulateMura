@@ -8,14 +8,14 @@ function CardTrabajos() {
             console.log(tiposProfesionMostrar);
 
             let contenidoCard = ``;
-            contenidoCard += `<div class="row">`; 
+            contenidoCard += `<div class="row">`;
 
-            let trabajosEncontrados = false; 
+            let trabajosEncontrados = false;
 
             $.each(tiposProfesionMostrar, function (index, tipoProfesion) {
-                
+
                 if (tipoProfesion.listadoPersonas && tipoProfesion.listadoPersonas.length > 0) {
-                    trabajosEncontrados = true; 
+                    trabajosEncontrados = true;
                     $.each(tipoProfesion.listadoPersonas, function (index, persona) {
                         contenidoCard += `
                             <div class="col-md-4 mb-3 cartas_card" id="card-${persona.trabajoID}"> <!-- col-md-4 para tener 3 por fila en pantallas medianas o más grandes -->
@@ -49,9 +49,9 @@ function CardTrabajos() {
                 }
             });
 
-            contenidoCard += `</div>`; 
+            contenidoCard += `</div>`;
 
-            
+
             if (!trabajosEncontrados) {
                 contenidoCard = `
                     <div class="alert alert-warning text-center" role="alert">
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", CardTrabajos);
 
 function agregarTrabajo() {
 
-  
+
     let personaID = document.getElementById("PersonaID").value;
     let trabajoID = document.getElementById("TrabajoID").value;
     let profesionID = document.getElementById("ProfesionID").value;
@@ -88,7 +88,7 @@ function agregarTrabajo() {
     let comentario = document.getElementById("comentario").value;
 
 
-   
+
     let formData = new FormData();
 
     formData.append("PersonaID", personaID);
@@ -177,10 +177,10 @@ function EliminarTrabajo(trabajoID) {
                 type: 'POST',
                 dataType: 'json',
                 success: function (Respuesta) {
-                   
+
                     CardTrabajos();
-                    
-                 
+
+
                     Swal.fire({
                         title: "!Eliminado",
                         text: "Su trabajo fue eliminado.",
@@ -196,19 +196,28 @@ function EliminarTrabajo(trabajoID) {
 }
 
 
+
+
+
+
+
+// desde aca empiza lo relacionado al postulado de trabajo y solicitud de servicios
+
+
+
 function PostularTrabajo(servicioID, trabajoID) {
-    console.log("servicioID:", servicioID, "trabajoID:", trabajoID); 
+    console.log("servicioID:", servicioID, "trabajoID:", trabajoID);
     $.ajax({
-        url: '/ContratoRespondido/SolicitarServicios',  
+        url: '/ContratoRespondido/SolicitarServicios',
         type: 'POST',
         data: { servicioID: servicioID, trabajoID: trabajoID },
         dataType: 'json',
-        success: function (response) {
-            if (response.success) {
-                alert(response.mensaje);
-                $('#serviciosModal').modal('hide'); 
+        success: function (SolicitarServicio) {
+            if (SolicitarServicio.success) {
+                alert(SolicitarServicio.mensaje);
+                $('#serviciosModal').modal('hide');
             } else {
-                alert(response.mensaje);
+                alert(SolicitarServicio.mensaje);
             }
         },
         error: function (xhr, status) {
@@ -224,9 +233,9 @@ function abrirModalPostular(trabajoID) {
         type: 'POST',
         data: { trabajoID: trabajoID },
         success: function (ContratosRespondidoMostrar) {
-            console.log(ContratosRespondidoMostrar); 
+            console.log(ContratosRespondidoMostrar);
             let contenidoTabla = ``;
-        
+
             $.each(ContratosRespondidoMostrar, function (index, contrato) {
                 contenidoTabla += `
                     <tr>
@@ -236,7 +245,7 @@ function abrirModalPostular(trabajoID) {
                         </td>
                     </tr>`;
             });
-        
+
             document.getElementById("tbody-Contratos").innerHTML = contenidoTabla;
             $('#serviciosModal').modal('show');
         },
@@ -247,46 +256,119 @@ function abrirModalPostular(trabajoID) {
 
 
 
-window.onload = TraerServiciosolicitado();
-function TraerServiciosolicitado() {
-    $.ajax({
-        url: '../../ContratoRespondido/TraerServiciosolicitado', 
-        type: 'POST',
-        dataType: 'json',
-        success: function (traerServicios) {
-            let contenidoTabla = ``;
-         
+// window.onload = ListadoServicioSolicitado();
+// function ListadoServicioSolicitado() {
+//     $.ajax({
+//         url: '../../ContratoRespondido/ListadoServicioSolicitado',
+//         type: 'POST',
+//         dataType: 'json',
+//         success: function (traerServicios) {
+//             let contenidoTabla = ``;
+        
+//             $.each(traerServicios, function (index, traerservicio) {
+//                 contenidoTabla += `
+//                     <tr>
+//                         <td class="ocultar-en-550px">${traerservicio.stringFechaMatch}</td> 
+                       
+//                         <td class="ocultar-en-550px">${traerservicio.nombrePersona}</td> 
+//                         <td>${traerservicio.descripcionTrabajo}</td> 
+//                         <td>${traerservicio.comentarioTrabajo}</td> 
+//                            <td>${traerservicio.respuestaDesolicitudString}</td> 
+//                         <td>
+//                             <button type="button" class="btn btn-info me-2" onclick="AceptarRespuesta(${traerservicio.contratoRespondidoID})">Aceptar</button>
+//                         </td>
+//                         <td>
+//                             <button type="button" class="btn btn-danger me-2" onclick="Rechazar(${traerservicio.contratoRespondidoID})">Rechazar</button>
+//                         </td>
+//                     </tr>`;
+//             });
+        
+//             document.getElementById("solicitudesPendientesBody").innerHTML = contenidoTabla;
+//         },
+        
+//         error: function (xhr, status) {
+//             alert('Hubo un problema al cargar las solicitudes.');
+//         }
+//     });
+// }
 
-            $.each(traerServicios, function (index, traerservicio) {
-           
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function AceptarRespuesta(contratoRespondidoID) {
+//     $.ajax({
+//         url: '../../ContratoRespondido/CambiarEstado',
+//         type: 'POST',
+//         dataType: 'json',
+//         data: {
+//             contratoRespondidoID: contratoRespondidoID,
+//             estado: 'aceptar'  // Indicamos que queremos aceptar la solicitud
+//         },
+//         success: function (respuesta) {
+//             ListadoServicioSolicitado();  // Recargar la tabla con la solicitud actualizada
+//         },
+//         error: function (xhr, status, error) {
+//             alert('Hubo un error al aceptar la solicitud: ' + error);
+//         }
+//     });
+// }
+
+// function Rechazar(contratoRespondidoID) {
+//     $.ajax({
+//         url: '../../ContratoRespondido/CambiarEstado',
+//         type: 'POST',
+//         dataType: 'json',
+//         data: {
+//             contratoRespondidoID: contratoRespondidoID,
+//             estado: 'rechazar'  // Indicamos que queremos rechazar la solicitud
+//         },
+//         success: function (respuesta) {
+//             ListadoServicioSolicitado();  // Recargar la tabla con la solicitud actualizada
+//         },
+//         error: function (xhr, status, error) {
+//             alert('Hubo un error al rechazar la solicitud: ' + error);
+//         }
+//     });
+// }
+
+
+
+window.onload = ListadoTrabajosPostulados;
+
+function ListadoTrabajosPostulados() {
+    $.ajax({
+        url: '/ContratoRespondido/ListadoTrabajosPostulados', 
+        type: 'POST',  
+        dataType: 'json',
+        success: function (trabajosPostulados) {
+            let contenidoTabla = ``; 
+
+            $.each(trabajosPostulados, function (index, trabajo) {
                 contenidoTabla += `
                     <tr>
-                    ->
-                        <td>${traerservicio.stringFechaMatch}</td> 
-                        <td>${traerservicio.respuesta }</td> 
-                           <td>${traerservicio.nombrePersona }</td> 
-                            <td>${traerservicio.descripcionTrabajo }</td> 
-                               <td>${traerservicio.comentarioTrabajo }</td> 
-                     
-                        <td>
-                            <button type="button" class="btn btn-info me-2"  onclick="Aceptar(${traerservicio.contratoRespondidoID})">Aceptar</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger me-2" onclick="Rechazar(${traerservicio.contratoRespondidoID})">Rechazar</button>
-                        </td>
+                        <td>${trabajo.descripcionTrabajo}</td>
+                        <td>${trabajo.comentarioTrabajo}</td>
+                  
+                        <td>${trabajo.nombrePersonaServicio} ${trabajo.apellidoPersonaServicio}</td> <!-- Nombre y Apellido de la persona que ofrece el servicio -->
+                        <td>${trabajo.estadoSolicitud}</td>
+                        <td>${trabajo.fechaPostulacion}</td>
                     </tr>`;
             });
 
-        
-            document.getElementById("solicitudesPendientesBody").innerHTML = contenidoTabla;
+            document.getElementById("tablaTrabajosPostulados").innerHTML = contenidoTabla;
         },
         error: function (xhr, status) {
-            alert('Hubo un problema al cargar las solicitudes.');
+            alert('Hubo un problema al cargar los trabajos postulados.');
         }
     });
 }
-
-
-
-
-
